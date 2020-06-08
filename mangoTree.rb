@@ -166,7 +166,7 @@ after_bundle do
   run 'rm app/controllers/pages_controller.rb'
   file 'app/controllers/pages_controller.rb', <<~RUBY
     class PagesController < ApplicationController
-      skip_before_action :authenticate_user!, only: [ :home ]
+      skip_before_action :authenticate_user!, only: [ :home, :kitchensink ]
 
       def home; end
 
