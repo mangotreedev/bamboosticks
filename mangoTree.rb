@@ -30,7 +30,7 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
 run 'curl -L https://github.com/nicoproto/mango-tree-rails-stylesheets/archive/master.zip > stylesheets.zip'
-run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/mango-tree-rails-stylesheets-master app/assets/stylesheets'
+run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/mangotree-rails-stylesheets-master app/assets/stylesheets'
 
 # Dev environment
 ########################################
