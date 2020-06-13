@@ -13,7 +13,7 @@ These should be commands such as yarn install, bundle install, rails db:migrate,
 [PLEASE REPLACE]
 ```
 
-## Type of change :squirrel:
+## Type of change :octopus:
 Please delete options that are not relevant.
 
 - [ ] New feature (non-breaking change which adds functionality)
