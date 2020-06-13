@@ -56,7 +56,7 @@ gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'ap
 ########################################
 file 'app/views/shared/_flashes.html.erb', <<~HTML
   <% if notice %>
-    <div class="alert alert-primary alert-dismissible fade show m-1" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
       <%= notice %>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -64,7 +64,7 @@ file 'app/views/shared/_flashes.html.erb', <<~HTML
     </div>
   <% end %>
   <% if alert %>
-    <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
       <%= alert %>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -73,15 +73,15 @@ file 'app/views/shared/_flashes.html.erb', <<~HTML
   <% end %>
   <% if success %>
     <div class="alert alert-success alert-dismissible fade show m-1" role="alert">
-      <%= alert %>
+      <%= success %>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   <% end %>
   <% if info %>
-    <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-      <%= alert %>
+    <div class="alert alert-primary alert-dismissible fade show m-1" role="alert">
+      <%= info %>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -224,7 +224,7 @@ after_bundle do
   
   # Pull Request Template
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md > .pull_request_template.md'
 
   # Rubocop
   ########################################
