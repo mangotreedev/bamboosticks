@@ -224,7 +224,7 @@ after_bundle do
   
   # Pull Request Template
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md > .pull_request_template.md'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md > pull_request_template.md'
 
   # Rubocop
   ########################################
