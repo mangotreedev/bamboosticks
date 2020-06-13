@@ -221,6 +221,10 @@ after_bundle do
   # Dotenv
   ########################################
   run 'touch .env'
+  
+  # Pull Request Template
+  ########################################
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md'
 
   # Rubocop
   ########################################
