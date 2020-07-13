@@ -123,8 +123,7 @@ after_bundle do
   ########################################
   rails_command 'db:drop db:create db:migrate'
   generate('simple_form:install', '--bootstrap')
-  generate(:controller, 'pages', 'home', '--skip-routes', '--no-test-framework')
-  generate(:controller, 'pages', 'kitchensink', '--skip-routes', '--no-test-framework')
+  generate(:controller, 'pages', 'home kitchensink', '--skip-routes', '--no-test-framework')
 
   # Routes
   ########################################
