@@ -1,7 +1,7 @@
 # MangoTree rails template
 
 ## Description :speak_no_evil:
-This is a quick setup template to generate a RoR application with a basic setup suitable for most website 
+This is a quick setup template to generate a RoR application with a basic setup suitable for most web applications
 
 ## Command to run :running:
 `rails new --database postgresql -m https://raw.githubusercontent.com/mangotreedev/templates/master/mangoTree.rb YOUR_RAILS_APP_NAME`
