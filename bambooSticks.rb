@@ -33,7 +33,15 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
 # Bullet Setup
 ########################################
-  environment 'config.after_initialize do\n Bullet.enable = true\n Bullet.rails_logger = true\n end', env: 'development'
+inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
+  <<-RUBY
+  # Bullet for development setup
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rails_logger = true
+  end
+  RUBY
+end
 
 # Assets
 ########################################
