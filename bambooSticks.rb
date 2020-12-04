@@ -25,10 +25,6 @@ end
 
 gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
-# bin/setup
-########################################
-gsub_file('bin/setup', /# system('bin\/yarn')/, "system('bin/yarn')")
-
 # Assets
 ########################################
 run 'rm -rf app/assets/stylesheets'
@@ -228,6 +224,11 @@ after_bundle do
   # Dotenv
   ########################################
   run 'touch .env'
+
+  # bin/setup
+  ########################################
+  run 'rm bin/setup'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/setup > bin/setup'
 
   # Pull Request Template
   ########################################
