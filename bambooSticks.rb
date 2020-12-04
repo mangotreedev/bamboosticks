@@ -13,25 +13,25 @@ inject_into_file 'Gemfile', before: 'group :development, :test do' do
 end
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
-  <<-RUBY
-  gem 'pry-byebug'
-  gem 'pry-rails'
-  gem 'dotenv-rails'
+  <<~RUBY
+    gem 'pry-byebug'
+    gem 'pry-rails'
+    gem 'dotenv-rails'
   RUBY
 end
 
 inject_into_file 'Gemfile', after: 'group :development do' do
-  <<-RUBY
-  gem 'bullet'
-  gem 'rack-mini-profiler'
+  <<~RUBY
+    gem 'bullet'
+    gem 'rack-mini-profiler'
   RUBY
 end
 
 inject_into_file 'Gemfile', after: 'group :test do' do
-  <<-RUBY
-  gem 'rspec-rails'
-  gem 'database_cleaner-active_record'
-  gem 'shoulda-matchers'
+  <<~RUBY
+    gem 'rspec-rails'
+    gem 'database_cleaner-active_record'
+    gem 'shoulda-matchers'
   RUBY
 end
 
