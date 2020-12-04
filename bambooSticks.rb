@@ -27,11 +27,7 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
 # bin/setup
 ########################################
-inject_into_file 'bin/setup', after: "system('bundle check') || system!('bundle install')" do
-  <<~RUBY
-  system('bin/yarn')
-  RUBY
-end
+gsub_file('bin/setup', /# system('bin\/yarn')/, "system('bin/yarn')")
 
 # Assets
 ########################################
