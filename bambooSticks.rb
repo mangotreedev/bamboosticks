@@ -12,25 +12,26 @@ inject_into_file 'Gemfile', before: 'group :development, :test do' do
   RUBY
 end
 
-inject_into_file 'Gemfile', after: 'group :development, :test do' do
-  <<~RUBY
+inject_into_file 'Gemfile', after: 'group :development, :test do\n' do
+  <<-RUBY
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
   RUBY
 end
 
-inject_into_file 'Gemfile', after: 'group :development do' do
-  <<~RUBY
+inject_into_file 'Gemfile', after: 'group :development do\n' do
+  <<-RUBY
   gem 'bullet'
   gem 'rack-mini-profiler'
   RUBY
 end
 
-inject_into_file 'Gemfile', after: 'group :test do' do
-  <<~RUBY
+inject_into_file 'Gemfile', after: 'group :test do\n' do
+  <<-RUBY
   gem 'rspec-rails'
   gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers'
   RUBY
 end
 
@@ -253,6 +254,7 @@ after_bundle do
   # Database Cleaner configuration
   inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
     <<~RUBY
+      # DatabaseCleaner with AR configuration
       config.before(:suite) do
         DatabaseCleaner.strategy = :truncation
         DatabaseCleaner.clean_with(:truncation)
@@ -269,7 +271,16 @@ after_bundle do
     RUBY
   end
 
-
+  # Shoulda Matchers configuration
+  append_to_file 'spec/rails_helper.rb' do
+    # Shoulda Matchers configuration
+    Shoulda::Matchers.configure do |config|
+      config.integrate do |with|
+        with.test_framework :rspec
+        with.library :rails
+      end
+    end
+  end
 
   # Stimulus Setup
   ########################################
