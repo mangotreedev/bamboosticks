@@ -1,7 +1,7 @@
 ---
 name:  Request
 about:  Create a request to help us improve
-title:  request / [...]
+title:  [Please summarize your issue here...]
 labels:  ''
 assignees:  ''
 
