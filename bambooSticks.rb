@@ -29,7 +29,7 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
-run 'curl -L https://github.com/nicoproto/mango-tree-rails-stylesheets/archive/master.zip > stylesheets.zip'
+run 'curl -L https://github.com/mangotreedev/templates/archive/master.zip > stylesheets.zip'
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/mangotree-rails-stylesheets-master app/assets/stylesheets'
 
 # Dev environment
@@ -220,14 +220,14 @@ after_bundle do
   # Dotenv
   ########################################
   run 'touch .env'
-  
+
   # Pull Request Template
   ########################################
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md > pull_request_template.md'
 
   # Rubocop
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/nicoproto/mangotree-templates/master/.rubocop.yml > .rubocop.yml'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/.rubocop.yml > .rubocop.yml'
 
   # Git
   ########################################
