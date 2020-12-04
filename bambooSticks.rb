@@ -250,10 +250,6 @@ after_bundle do
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/setup > bin/setup'
   run 'chmod +x ./bin/setup'
 
-  # Pull Request Template
-  ########################################
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/pull_request_template.md > pull_request_template.md'
-
   # Rubocop
   ########################################
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/.rubocop.yml > .rubocop.yml'
