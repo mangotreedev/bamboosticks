@@ -1,7 +1,9 @@
 # MangoTree Rails Template: BambooSticks
 
 ## Description :speak_no_evil:
-This is a quick setup template to generate a RoR application with a basic setup suitable for most web applications
+BambooSticks is the template we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.  If you would like to see something added in or want to understand more on why we made certain decisions please don't hesitate to raise an issue!
+
+![Alt text](https://res.cloudinary.com/nico1711/image/upload/c_scale,w_340/v1607091430/bamboo_clqlng.jpg "bamboo_shoots")
 
 ## Command to run :running:
 `rails new --database postgresql -m https://raw.githubusercontent.com/mangotreedev/templates/master/bambooSticks.rb YOUR_RAILS_APP_NAME`
@@ -24,7 +26,7 @@ We generated a Kitchensink route, action and view to populate with front-end com
 Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github
 
 ## Other changes :zap:
-- Replaced stylesheets structure with [this one](https://github.com/nicoproto/mangotree-rails-stylesheets)
+- Replaced stylesheets structure with [this one](https://github.com/mangotreedev/templates/tree/master/stylesheets)
 - Added four type of flashes: Notice, alert, info & success
 
 
