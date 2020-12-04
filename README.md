@@ -1,4 +1,4 @@
-# MangoTree rails template: BambooSticks
+# MangoTree Rails Template: BambooSticks
 
 ## Description :speak_no_evil:
 This is a quick setup template to generate a RoR application with a basic setup suitable for most web applications
