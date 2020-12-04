@@ -253,8 +253,19 @@ after_bundle do
   # Database Cleaner configuration
   inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
     <<~RUBY
+      config.before(:suite) do
+        DatabaseCleaner.strategy = :truncation
+        DatabaseCleaner.clean_with(:truncation)
+      end
 
+      config.before do
+        DatabaseCleaner.strategy = :transaction
+        DatabaseCleaner.start
+      end
 
+      config.append_after do
+        DatabaseCleaner.clean
+      end
     RUBY
   end
 
