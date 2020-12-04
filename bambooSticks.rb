@@ -229,6 +229,7 @@ after_bundle do
   ########################################
   run 'rm bin/setup'
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/setup > bin/setup'
+  run 'chmod +x ./bin/setup'
 
   # Pull Request Template
   ########################################
