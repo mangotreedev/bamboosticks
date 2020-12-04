@@ -17,8 +17,6 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
-
-  gem 'rspec-rails'
   RUBY
 end
 
@@ -29,20 +27,14 @@ inject_into_file 'Gemfile', after: 'group :development do' do
   RUBY
 end
 
-gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
-
-# Bullet Setup
-########################################
-inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
+inject_into_file 'Gemfile', after: 'group :test do' do
   <<~RUBY
-
-  # Bullet for development setup
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.rails_logger = true
-  end
+  gem 'rspec-rails'
+  gem 'database_cleaner-active_record'
   RUBY
 end
+
+gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
 # Assets & GitHub Actions/Workflow
 ########################################
@@ -239,10 +231,34 @@ after_bundle do
     JS
   end
 
+  # Bullet Configuration
+  ########################################
+  inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
+    <<~RUBY
+
+    # Bullet for development setup
+    config.after_initialize do
+      Bullet.enable = true
+      Bullet.rails_logger = true
+    end
+    RUBY
+  end
+
   # Testing Suite Configuration (RSpec+)
   ########################################
-  run 'rm -rf app/test'
+  # RSpec configuration
+  run 'rm -rf test'
   generate('rspec:install')
+
+  # Database Cleaner configuration
+  inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
+    <<~RUBY
+
+
+    RUBY
+  end
+
+
 
   # Stimulus Setup
   ########################################
