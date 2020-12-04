@@ -99,7 +99,7 @@ end
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app generated with MangoTree template, based on LeWagon template.
+Rails app generated with MangoTree template, based on LeWagon Devise template & Thoughtbot Suspenders.
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
