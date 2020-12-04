@@ -13,7 +13,7 @@ inject_into_file 'Gemfile', before: 'group :development, :test do' do
 end
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
-  <<-RUBY
+  <<~RUBY
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
@@ -23,7 +23,7 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
 end
 
 inject_into_file 'Gemfile', after: 'group :development do' do
-  <<-RUBY
+  <<~RUBY
   gem 'bullet'
   gem 'rack-mini-profiler'
   RUBY
@@ -34,7 +34,7 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 # Bullet Setup
 ########################################
 inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
-  <<-RUBY
+  <<~RUBY
 
   # Bullet for development setup
   config.after_initialize do
