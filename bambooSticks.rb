@@ -217,6 +217,10 @@ after_bundle do
     JS
   end
 
+  # Stimulus Setup
+  ########################################
+  run 'rails webpacker:install:stimulus'
+
   # Dotenv
   ########################################
   run 'touch .env'
@@ -232,7 +236,7 @@ after_bundle do
   # Git
   ########################################
   git add: '.'
-  git commit: "-m 'Initial commit with devise template from mango-tree-rails-stylesheets template'"
+  git commit: "-m 'ARCH: Base rails app generation using BambooSticks'"
 
   # Fix puma config
   gsub_file('config/puma.rb', 'pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }', '# pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }')
