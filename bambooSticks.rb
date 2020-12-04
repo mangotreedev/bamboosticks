@@ -44,7 +44,7 @@ inject_into_file 'config/environments/development.rb', after: 'config.file_watch
   RUBY
 end
 
-# Assets
+# Assets & GitHub Actions/Workflow
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
