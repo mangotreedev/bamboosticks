@@ -1,17 +1,9 @@
-
 ---
-
 name:  Request
-
 about:  Create a request to help us improve
-
 title:  request / [...]
-
 labels:  ''
-
 assignees:  ''
-
-
 
 ---
 
