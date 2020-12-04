@@ -29,8 +29,8 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
-run 'curl -L https://github.com/mangotreedev/templates/archive/master.zip > stylesheets.zip'
-run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/templates-master app/assets/stylesheets'
+run 'curl -L https://github.com/mangotreedev/templates/stylesheets/archive/master.zip > stylesheets.zip'
+run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/stylesheets-master app/assets/stylesheets'
 
 # Dev environment
 ########################################
