@@ -35,6 +35,7 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 ########################################
 inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
   <<-RUBY
+
   # Bullet for development setup
   config.after_initialize do
     Bullet.enable = true
