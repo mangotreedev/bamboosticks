@@ -26,7 +26,7 @@ We generated a Kitchensink route, action and view to populate with front-end com
 Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github
 
 ## Other changes :zap:
-- Replaced stylesheets structure with [this one](https://github.com/nicoproto/mangotree-rails-stylesheets)
+- Replaced stylesheets structure with [this one](https://github.com/mangotreedev/templates/stylesheets)
 - Added four type of flashes: Notice, alert, info & success
 
 
