@@ -25,6 +25,14 @@ end
 
 gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
+# bin/setup
+########################################
+inject_into_file 'bin/setup', after: "system('bundle check') || system!('bundle install')" do
+  <<~RUBY
+  system('bin/yarn')
+  RUBY
+end
+
 # Assets
 ########################################
 run 'rm -rf app/assets/stylesheets'
