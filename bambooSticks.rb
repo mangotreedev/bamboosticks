@@ -20,6 +20,8 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
 
   gem 'bullet'
   gem 'rack-mini-profiler'
+
+  gem 'rspec-rails'
   RUBY
 end
 
