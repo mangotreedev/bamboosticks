@@ -177,7 +177,7 @@ after_bundle do
     end
   RUBY
 
-  # migrate + devise views
+  # Migrate & Devise views
   ########################################
   rails_command 'db:migrate'
   generate('devise:views')
@@ -238,6 +238,11 @@ after_bundle do
       );
     JS
   end
+
+  # Testing Suite Configuration (RSpec+)
+  ########################################
+  run 'rm -rf app/test'
+  generate('rspec:install')
 
   # Stimulus Setup
   ########################################
