@@ -1,6 +1,9 @@
 .navbar-mt {
   justify-content: space-between;
   background: white;
+  .navbar-brand, .dropdown-item {
+    color: $mango-black;
+  }
 }
 
 .navbar-mt .navbar-collapse {
