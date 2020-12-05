@@ -230,7 +230,11 @@ gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'ap
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app generated with MangoTree template, based on LeWagon Devise template & Thoughtbot Suspenders.
+# >>PLEASE UPDATE ME<<
+
+Rails app generated with BambooSticks, based on the LeWagon Devise template & Thoughtbot Suspenders.
+
+Developed & Designed by MangoTree Dev Agency
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
