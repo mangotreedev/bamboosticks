@@ -59,8 +59,10 @@ def pick_simple_option
   end
 end
 
-say '-- Welcome to BambooSticks 🎍 RoR Template! --'
-say 'a framework developed by MangoTree 🌴 to support you in your development'
+say
+say
+say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
+say 'a framework developed by MangoTree 🥭🌴 to support you in your development'
 say
 say 'Following is a short quiz on preference:'
 say 'Would you like to implement devise for authentication? [yn] 🤠'
