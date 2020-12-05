@@ -276,7 +276,6 @@ after_bundle do
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
-  setup_activestorage_attachments if activestorage_option
 
   # Environments
   ########################################
