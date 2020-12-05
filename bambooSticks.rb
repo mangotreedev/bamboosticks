@@ -1,3 +1,79 @@
+def setup_devise_authentication
+  # Devise install + user
+  ########################################
+  generate('devise:install')
+  generate('devise', 'User')
+
+  # App controller
+  ########################################
+  run 'rm app/controllers/application_controller.rb'
+  file 'app/controllers/application_controller.rb', <<~RUBY
+    class ApplicationController < ActionController::Base
+    #{  "protect_from_forgery with: :exception\n" if Rails.version < "5.2"}  before_action :authenticate_user!
+      add_flash_types :info, :success
+    end
+  RUBY
+
+  # Migrate & Devise views
+  ########################################
+  rails_command 'db:migrate'
+  generate('devise:views')
+
+  # Pages Controller
+  ########################################
+  run 'rm app/controllers/pages_controller.rb'
+  file 'app/controllers/pages_controller.rb', <<~RUBY
+    class PagesController < ApplicationController
+      skip_before_action :authenticate_user!, only: [ :home, :kitchensink ]
+
+      def home; end
+
+      def kitchensink; end
+    end
+  RUBY
+end
+
+def setup_pundit_authorization
+
+end
+
+def setup_stimulus_framework
+  # Stimulus Setup
+  ########################################
+  run 'rails webpacker:install:stimulus'
+end
+
+def setup_activestorage_attachments
+
+end
+
+def pick_simple_option
+  option = ask 'Pleaes provide a choice'
+
+  case option
+  when 'y' then return true
+  when 'n' then return false
+  else
+    say 'Error - please pick a valid [yn] choice'
+    pick_simple_option
+  end
+end
+
+say '-- Welcome to BambooSticks 🎍 RoR Template! --'
+say 'a framework developed by MangoTree 🌴 to support you in your development'
+say
+say 'Following is a short quiz on preference:'
+say 'Would you like to implement devise for authentication? [yn] 🤨'
+devise_option = pick_simple_option
+say 'Would you like to implement pundit for authorization? [yn] 🧐'
+pundit_option = pick_simple_option
+say 'Would you like to implement stimulus for javascript? [yn] 🥳'
+stimulus_option = pick_simple_option
+say 'Would you like to implement activestorage for attachments? [yn] 🥳'
+activestorage_option = pick_simple_option
+say
+
+
 run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 
 # GEMFILE
@@ -156,38 +232,7 @@ after_bundle do
     /coverage/*
   TXT
 
-  # Devise install + user
-  ########################################
-  generate('devise:install')
-  generate('devise', 'User')
-
-  # App controller
-  ########################################
-  run 'rm app/controllers/application_controller.rb'
-  file 'app/controllers/application_controller.rb', <<~RUBY
-    class ApplicationController < ActionController::Base
-    #{  "protect_from_forgery with: :exception\n" if Rails.version < "5.2"}  before_action :authenticate_user!
-      add_flash_types :info, :success
-    end
-  RUBY
-
-  # Migrate & Devise views
-  ########################################
-  rails_command 'db:migrate'
-  generate('devise:views')
-
-  # Pages Controller
-  ########################################
-  run 'rm app/controllers/pages_controller.rb'
-  file 'app/controllers/pages_controller.rb', <<~RUBY
-    class PagesController < ApplicationController
-      skip_before_action :authenticate_user!, only: [ :home, :kitchensink ]
-
-      def home; end
-
-      def kitchensink; end
-    end
-  RUBY
+  setup_devise_authentication
 
   # Environments
   ########################################
@@ -295,9 +340,7 @@ after_bundle do
     RUBY
   end
 
-  # Stimulus Setup
-  ########################################
-  run 'rails webpacker:install:stimulus'
+  setup_stimulus_framework
 
   # Dotenv
   ########################################
