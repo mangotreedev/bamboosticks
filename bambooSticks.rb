@@ -62,13 +62,15 @@ end
 say
 say
 say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
-say 'a framework developed by MangoTree 🥭🌴 to support you in your development'
+say 'a setup developed by MangoTree 🥭🌴 to support you in your development'
 say
 say 'Following is a short quiz on preference:'
 say 'Would you like to implement devise for authentication? [yn] 🤠'
 devise_option = pick_simple_option
-say 'Would you like to implement pundit for authorization? [yn] 🧐'
-pundit_option = pick_simple_option
+if devise_option
+  say 'Would you like to implement pundit for authorization? [yn] 🧐'
+  pundit_option = pick_simple_option
+end
 say 'Would you like to implement stimulus for javascript? [yn] 🥳'
 stimulus_option = pick_simple_option
 say 'Would you like to implement activestorage for attachments? [yn] 🥰'
