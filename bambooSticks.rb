@@ -17,11 +17,12 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
-  # Rspec Testing Suite
+  # Testing Suite
   gem 'rspec-rails'
   gem 'database_cleaner-active_record'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
+  gem 'timecop'
   RUBY
 end
 
