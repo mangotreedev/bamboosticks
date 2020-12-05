@@ -74,10 +74,6 @@ def setup_stimulus_framework
   run 'rails webpacker:install:stimulus'
 end
 
-def setup_activestorage_attachments
-
-end
-
 def pick_simple_option
   option = ask 'Please provide a choice'
 
@@ -104,8 +100,6 @@ if devise_option
 end
 say 'Would you like to implement stimulus for javascript? [yn] 🥳'
 stimulus_option = pick_simple_option
-say 'Would you like to implement activestorage for attachments? [yn] 🥰'
-activestorage_option = pick_simple_option
 say
 
 
@@ -282,6 +276,7 @@ after_bundle do
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
+  setup_activestorage_attachments if activestorage_option
 
   # Environments
   ########################################
