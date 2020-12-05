@@ -232,7 +232,7 @@ after_bundle do
     /coverage/*
   TXT
 
-  setup_devise_authentication
+  setup_devise_authentication if devise_option
 
   # Environments
   ########################################
@@ -340,7 +340,7 @@ after_bundle do
     RUBY
   end
 
-  setup_stimulus_framework
+  setup_stimulus_framework if stimulus_option
 
   # Dotenv
   ########################################
