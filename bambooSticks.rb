@@ -121,7 +121,7 @@ def setup_stimulus_framework
 end
 
 def pick_simple_option
-  option = ask 'Please provide a choice'
+  option = ask '>> '
 
   case option
   when 'y' then return true
