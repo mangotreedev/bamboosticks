@@ -275,7 +275,7 @@ after_bundle do
   end
 
   # Shoulda Matchers configuration
-  append_to_file 'spec/rails_helper.rb' do
+  append_file 'spec/rails_helper.rb' do
     <<~RUBY
       # Shoulda Matchers configuration
       Shoulda::Matchers.configure do |config|
@@ -284,6 +284,14 @@ after_bundle do
           with.library :rails
         end
       end
+    RUBY
+  end
+
+  prepend_file 'spec/spec_helper.rb' do
+    <<~RUBY
+      require 'simplecov'
+
+      SimpleCov.start 'rails'
     RUBY
   end
 
