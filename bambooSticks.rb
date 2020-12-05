@@ -41,11 +41,11 @@ def setup_devise_authentication
     <% end %>
   HTML
 
-  run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/_navbar.html.erb > app/views/shared/_navbar.html.erb'
 
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
-
+      <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
     HTML
   end
