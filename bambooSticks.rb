@@ -82,13 +82,17 @@ run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 ########################################
 inject_into_file 'Gemfile', before: 'group :development, :test do' do
   <<~RUBY
-    gem 'devise'
-
     gem 'autoprefixer-rails'
     gem 'font-awesome-sass'
     gem 'simple_form'
   RUBY
 end
+
+inject_into_file 'Gemfile', before: 'group :development, :test do' do
+  <<~RUBY
+    gem 'devise'
+  RUBY
+end if devise_option
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
