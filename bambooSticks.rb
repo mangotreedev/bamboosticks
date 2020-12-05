@@ -41,7 +41,7 @@ def setup_devise_authentication
     <% end %>
   HTML
 
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/navbar.html.erb > app/views/shared/_navbar.html.erb'
 
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
@@ -401,7 +401,7 @@ after_bundle do
 
   # Rubocop
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/.rubocop.yml > .rubocop.yml'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/rubocop.yml > .rubocop.yml'
 
   # Git
   ########################################
