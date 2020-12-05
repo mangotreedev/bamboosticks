@@ -4,6 +4,52 @@ def setup_devise_authentication
   generate('devise:install')
   generate('devise', 'User')
 
+  # Flashes & Navbar
+  ########################################
+  file 'app/views/shared/_flashes.html.erb', <<~HTML
+    <% if notice %>
+      <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+        <%= notice %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <% if success %>
+      <div class="alert alert-success alert-dismissible fade show m-1" role="alert">
+        <%= success %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <% if info %>
+      <div class="alert alert-primary alert-dismissible fade show m-1" role="alert">
+        <%= info %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  HTML
+
+  run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
+
+  inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
+    <<-HTML
+
+      <%= render 'shared/flashes' %>
+    HTML
+  end
+
   # App controller
   ########################################
   run 'rm app/controllers/application_controller.rb'
@@ -180,50 +226,6 @@ style = <<~HTML
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 HTML
 gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>", style)
-
-# Flashes
-########################################
-file 'app/views/shared/_flashes.html.erb', <<~HTML
-  <% if notice %>
-    <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-      <%= notice %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
-  <% if alert %>
-    <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
-      <%= alert %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
-  <% if success %>
-    <div class="alert alert-success alert-dismissible fade show m-1" role="alert">
-      <%= success %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
-  <% if info %>
-    <div class="alert alert-primary alert-dismissible fade show m-1" role="alert">
-      <%= info %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
-HTML
-
-inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
-  <<-HTML
-
-    <%= render 'shared/flashes' %>
-  HTML
-end
 
 # README
 ########################################
