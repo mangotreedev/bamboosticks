@@ -1,5 +1,5 @@
 def setup_devise_authentication
-  # Devise install + user
+  # Devise install + User
   ########################################
   generate('devise:install')
   generate('devise', 'User')
@@ -34,7 +34,38 @@ def setup_devise_authentication
 end
 
 def setup_pundit_authorization
+  # Pundit install
+  ########################################
+  generate('pundit:install')
 
+  # App controller
+  ########################################
+  run 'rm app/controllers/application_controller.rb'
+  file 'app/controllers/application_controller.rb', <<~RUBY
+    class ApplicationController < ActionController::Base
+    #{  "protect_from_forgery with: :exception\n" if Rails.version < "5.2"}  before_action :authenticate_user!
+      add_flash_types :info, :success
+
+      include Pundit
+
+      # Pundit: white-list approach.
+      after_action :verify_authorized, except: :index, unless: :skip_pundit?
+      after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
+      # Uncomment when you *really understand* Pundit!
+      # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+      # def user_not_authorized
+      #   flash[:alert] = "You are not authorized to perform this action."
+      #   redirect_to(root_path)
+      # end
+
+      private
+
+      def skip_pundit?
+        devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
+      end
+    end
+  RUBY
 end
 
 def setup_stimulus_framework
@@ -95,6 +126,12 @@ inject_into_file 'Gemfile', before: 'group :development, :test do' do
     gem 'devise'
   RUBY
 end if devise_option
+
+inject_into_file 'Gemfile', before: 'group :development, :test do' do
+  <<~RUBY
+    gem 'pundit'
+  RUBY
+end if pundit_option
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
@@ -240,7 +277,11 @@ after_bundle do
     /coverage/*
   TXT
 
+  # Options Setup
+  ########################################
   setup_devise_authentication if devise_option
+  setup_pundit_authorization if pundit_option
+  setup_stimulus_framework if stimulus_option
 
   # Environments
   ########################################
@@ -347,8 +388,6 @@ after_bundle do
       SimpleCov.start 'rails'
     RUBY
   end
-
-  setup_stimulus_framework if stimulus_option
 
   # Dotenv
   ########################################
