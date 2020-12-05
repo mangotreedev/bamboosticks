@@ -17,6 +17,11 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  # Rspec Testing Suite
+  gem 'rspec-rails'
+  gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
   RUBY
 end
 
@@ -24,14 +29,6 @@ inject_into_file 'Gemfile', after: 'group :development do' do
   <<-RUBY
   gem 'bullet'
   gem 'rack-mini-profiler'
-  RUBY
-end
-
-inject_into_file 'Gemfile', after: 'group :test do' do
-  <<-RUBY
-  gem 'rspec-rails'
-  gem 'database_cleaner-active_record'
-  gem 'shoulda-matchers'
   RUBY
 end
 
@@ -251,7 +248,7 @@ after_bundle do
   run 'rm -rf test'
   generate('rspec:install')
 
-  # Database Cleaner configuration
+  # Database Cleaner & Factory Bot configuration
   inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
     <<~RUBY
       # DatabaseCleaner with AR configuration
@@ -268,6 +265,8 @@ after_bundle do
       config.append_after do
         DatabaseCleaner.clean
       end
+      # Factory Bot configuration
+      config.include FactoryBot::Syntax::Methods
     RUBY
   end
 
