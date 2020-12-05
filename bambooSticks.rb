@@ -237,11 +237,11 @@ after_bundle do
   inject_into_file 'config/environments/development.rb', after: 'config.file_watcher = ActiveSupport::EventedFileUpdateChecker' do
     <<~RUBY
 
-    # Bullet for development setup
-    config.after_initialize do
-      Bullet.enable = true
-      Bullet.rails_logger = true
-    end
+      # Bullet for development setup
+      config.after_initialize do
+        Bullet.enable = true
+        Bullet.rails_logger = true
+      end
     RUBY
   end
 
@@ -273,13 +273,15 @@ after_bundle do
 
   # Shoulda Matchers configuration
   append_to_file 'spec/rails_helper.rb' do
-    # Shoulda Matchers configuration
-    Shoulda::Matchers.configure do |config|
-      config.integrate do |with|
-        with.test_framework :rspec
-        with.library :rails
+    <<~RUBY
+      # Shoulda Matchers configuration
+      Shoulda::Matchers.configure do |config|
+        config.integrate do |with|
+          with.test_framework :rspec
+          with.library :rails
+        end
       end
-    end
+    RUBY
   end
 
   # Stimulus Setup
