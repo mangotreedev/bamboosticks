@@ -1,6 +1,6 @@
 name: Continuous Integration
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
   build:
@@ -8,16 +8,13 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12.1
+        image: postgres
         env:
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-      redis:
-        image: redis
-        ports: ['6379:6379']
-        options: --entrypoint redis-server
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -64,10 +61,15 @@ jobs:
       - name: Yarn install
         run: yarn --frozen-lockfile
 
+      - name: Install library for postgres
+        run: sudo apt-get install libpq-dev
+
       - name: Setup DB
         env:
           RAILS_ENV: test
-          REDIS_URL: redis://localhost:6379/0
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PORT: 5432
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
@@ -75,5 +77,4 @@ jobs:
       - name: Run RSpec
         env:
           RAILS_ENV: test
-          REDIS_URL: redis://localhost:6379/0
         run: bundle exec rspec
