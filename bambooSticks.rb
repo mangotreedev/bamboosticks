@@ -254,6 +254,10 @@ environment generators
 # AFTER BUNDLE
 ########################################
 after_bundle do
+  # Spring Stop
+  ########################################
+  run "spring stop" # Fix pesky hangtime
+
   # Generators: db + simple form + pages controller
   ########################################
   rails_command 'db:drop db:create db:migrate'
