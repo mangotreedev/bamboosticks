@@ -389,6 +389,14 @@ after_bundle do
     RUBY
   end
 
+  gsub_file('config/database.yml',
+            /\n# As with config\/credentials.yml, you never want to store sensitive information,/,
+            "\thost: 127.0.0.1\n\tusername: postgres\n\tpassword: postgres\
+            \n# As with config\/credentials.yml, you never want to store sensitive information,")
+
+
+# As with config/credentials.yml, you never want to store sensitive information,
+
   # Dotenv
   ########################################
   run 'touch .env'
