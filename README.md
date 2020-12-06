@@ -20,7 +20,7 @@ If you would like to see something added in or want to understand more on why we
 - [Pry-byebyg](https://github.com/deivid-rodriguez/pry-byebug) - adds step-by-step debugging and stack navigation capabilities to pry using byebug
 - [Pry-rails](https://github.com/rweng/pry-rails) - a small gem which causes rails console to open pry
 - [Rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) - middleware that displays speed badge for every html page
-- [Simple Form](https://github.com/heartcombo/simple_form) - rails forms made easy.
+- [Simple Form](https://github.com/heartcombo/simple_form) - rails forms made easy
 
 ## Optional gems :gem:
 - [Devise](https://github.com/heartcombo/devise) - a flexible authentication solution for Rails based on Warden
@@ -40,7 +40,7 @@ If you would like to see something added in or want to understand more on why we
 We've built in a full testing suite revolving around RSpec that gets you off the ground quickly writing tests in no time
 
 ## Kitchen Sink :ship:
-We generated a Kitchensink route, action and view to populate with front-end components for you and your team
+We've generated a Kitchensink route, action and view to populate with front-end components for you and your team
 
 ## Github Actions & Templates :raising_hand:
 Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github.
@@ -51,7 +51,7 @@ Added a continuous integration setup to run with your rails applications and to 
 
 ## Other changes :zap:
 - Replaced stylesheets structure with [this one](https://github.com/mangotreedev/templates/tree/master/stylesheets)
-- Added four type of flashes: Notice, alert, info & success
+- Added four type of flashes: notice, alert, info & success
 - Added a navbar to play with devise
 - Set up JS to play nicely with Turbolinks
 - Bootstrap configuration for webpacker
