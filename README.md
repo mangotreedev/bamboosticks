@@ -3,7 +3,7 @@
 ## Description :speak_no_evil:
 BambooSticks is the template we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.  If you would like to see something added in or want to understand more on why we made certain decisions please don't hesitate to raise an issue!
 
-![Alt text](https://res.cloudinary.com/nico1711/image/upload/c_scale,w_340/v1607091430/bamboo_clqlng.jpg "bamboo_shoots")
+![Alt text](https://res.cloudinary.com/nico1711/image/upload/v1607220863/bamboo_clqlng.jpg "bamboo_shoots")
 
 ## Command to run :running:
 `rails new --database postgresql -m https://raw.githubusercontent.com/mangotreedev/templates/master/bambooSticks.rb YOUR_RAILS_APP_NAME`
