@@ -1,7 +1,9 @@
 # MangoTree Rails Template: BambooSticks
 
 ## Description :speak_no_evil:
-BambooSticks is the template we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.  
+BambooSticks is the template we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.
+
+It will take you through a decision tree on whether or not you want to add devise for authentication, pundit for authorization, and stimulus for JS; so make sure you pay attention while your app is generating!
 
 If you would like to see something added in or want to understand more on why we made certain decisions please don't hesitate to raise an issue!
 
@@ -34,8 +36,7 @@ If you would like to see something added in or want to understand more on why we
 - [SimpleCov](https://github.com/simplecov-ruby/simplecov) - a code coverage analysis tool for Ruby
 
 
-
-## Testing Suite :nerd:
+## Testing Suite :bowtie:
 We've built in a full testing suite revolving around RSpec that gets you off the ground quickly writing tests in no time
 
 ## Kitchen Sink :ship:
@@ -51,6 +52,9 @@ Added a continuous integration setup to run with your rails applications and to 
 ## Other changes :zap:
 - Replaced stylesheets structure with [this one](https://github.com/mangotreedev/templates/tree/master/stylesheets)
 - Added four type of flashes: Notice, alert, info & success
+- Added a navbar to play with devise
+- Set up JS to play nicely with Turbolinks
+- Bootstrap configuration for webpacker
 
 
 Built with love ❤️ By Nico🐺 and Sy🐢
