@@ -41,7 +41,7 @@ def setup_devise_authentication
     <% end %>
   HTML
 
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/_navbar.html.erb > app/views/shared/_navbar.html.erb'
 
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
@@ -201,11 +201,11 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
-run 'curl -L https://github.com/mangotreedev/templates/archive/master.zip > stylesheets.zip'
+run 'curl -L https://github.com/mangotreedev/bamboosticks/archive/master.zip > stylesheets.zip'
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip'
-run 'mv app/assets/templates-master/stylesheets app/assets/stylesheets'
-run 'mv app/assets/templates-master/.github .github'
-run 'rm -rf app/assets/templates-master'
+run 'mv app/assets/bamboosticks-master/stylesheets app/assets/stylesheets'
+run 'mv app/assets/bamboosticks-master/.github .github'
+run 'rm -rf app/assets/bamboosticks-master'
 
 # Dev environment
 ########################################
@@ -403,12 +403,12 @@ after_bundle do
   # bin/setup
   ########################################
   run 'rm bin/setup'
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/setup > bin/setup'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/setup > bin/setup'
   run 'chmod +x ./bin/setup'
 
   # Rubocop
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/templates/master/.rubocop.yml > .rubocop.yml'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/.rubocop.yml > .rubocop.yml'
 
 
   # Git
