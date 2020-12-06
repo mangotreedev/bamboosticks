@@ -393,7 +393,7 @@ after_bundle do
   ########################################
   gsub_file('config/database.yml',
             /\n# As with config\/credentials.yml, you never want to store sensitive information,/,
-            " host: 127.0.0.1\n username: postgres\n password: postgres\
+            "  host: 127.0.0.1\n  username: postgres\n  password: postgres\
             \n\n# As with config\/credentials.yml, you never want to store sensitive information,")
 
   # Dotenv
