@@ -10,7 +10,7 @@ If you would like to see something added in or want to understand more on why we
 ![Alt text](https://res.cloudinary.com/nico1711/image/upload/v1607220863/bamboo_clqlng.jpg "bamboo_shoots")
 
 ## Command to run :running:
-`rails new --database postgresql -m https://raw.githubusercontent.com/mangotreedev/templates/master/bambooSticks.rb YOUR_RAILS_APP_NAME`
+`rails new --database postgresql -m https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bambooSticks.rb YOUR_RAILS_APP_NAME`
 
 ## Added gems :gem:
 - [Autoprefixer Rails](https://github.com/ai/autoprefixer-rails) - a tool to parse CSS and add vendor prefixes to CSS rules 
