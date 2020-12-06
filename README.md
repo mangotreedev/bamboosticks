@@ -28,17 +28,25 @@ If you would like to see something added in or want to understand more on why we
 ## Testing gems :gem:
 - [RSpec-Rails](https://github.com/rspec/rspec-rails) - the RSpec testing framework for Rails
 - [Database Cleaner Active Record](https://github.com/DatabaseCleaner/database_cleaner-active_record) - clean your ActiveRecord databases 
-- []() - 
-- []() - 
-- []() - 
-- []() - 
+- [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) - provides RSpec- and Minitest-compatible one-liners to test common Rails functionality
+- [Factory Bot for Rails](https://github.com/thoughtbot/factory_bot_rails) - a fixtures replacement with a straightforward definition syntax
+- [Timecop](https://github.com/travisjeffery/timecop) - a gem providing "time travel" and "time freezing" capabilities
+- [SimpleCov](https://github.com/simplecov-ruby/simplecov) - a code coverage analysis tool for Ruby
 
+
+
+## Testing Suite :nerd:
+We've built in a full testing suite revolving around RSpec that gets you off the ground quickly writing tests in no time
 
 ## Kitchen Sink :ship:
-We generated a Kitchensink route, action and view to populate with front-end components
+We generated a Kitchensink route, action and view to populate with front-end components for you and your team
 
-## Pull request template :raising_hand:
-Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github
+## Github Actions & Templates :raising_hand:
+Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github.
+
+Added a customized [template](https://raw.githubusercontent.com/mangotreedev/templates/master/.github/ISSUE_TEMPLATE/request.md) for opening issues in your repoo that can be features, support, or bug requests.
+
+Added a continuous integration setup to run with your rails applications and to check that all of the tests you've written with RSpec are passing during your pull requests
 
 ## Other changes :zap:
 - Replaced stylesheets structure with [this one](https://github.com/mangotreedev/templates/tree/master/stylesheets)
