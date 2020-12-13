@@ -191,7 +191,8 @@ end
 inject_into_file 'Gemfile', after: 'group :development do' do
   <<-RUBY
   gem 'bullet'
-  gem 'rack-mini-profiler'
+  # Comment in when ready to see page load times
+  # gem 'rack-mini-profiler'
   RUBY
 end
 
