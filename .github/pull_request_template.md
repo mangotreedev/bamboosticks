@@ -2,7 +2,7 @@
 
 ## Description :speak_no_evil:
 [PLEASE REPLACE]
-Describe the motivation and context for the pull request, explain your why! Please also include a summary of the change and which issue is fixed. List any dependencies that are required for this change.
+Describe the motivation and context for the pull request, explain your why! Please also include a summary of the change and which issue is fixed. List any dependencies that are required for this change.  Finally, tell us at a high level what the change achieves.
 [PLEASE REPLACE]
 
 ## Commands to run :running:
