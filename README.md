@@ -45,7 +45,7 @@ We've generated a Kitchensink route, action and view to populate with front-end 
 ## Github Actions & Templates :raising_hand:
 Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github.
 
-Added a customized [template](https://raw.githubusercontent.com/mangotreedev/templates/master/.github/ISSUE_TEMPLATE/request.md) for opening issues in your repoo that can be features, support, or bug requests.
+Added a customized [template](https://raw.githubusercontent.com/mangotreedev/templates/master/.github/ISSUE_TEMPLATE/request.md) for opening issues in your repo that can be features, support, or bug requests.
 
 Added a continuous integration setup to run with your rails applications and to check that all of the tests you've written with RSpec are passing during your pull requests
 
