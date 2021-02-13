@@ -19,7 +19,7 @@ def setup_frontend_framework
   RUBY
 
   setup_bootstrap_framework if bootstrap_option
-  setup_tailwind_framework if bootstrap_option
+  setup_tailwind_framework if tailwind_option
 end
 
 def setup_bootstrap_framework
