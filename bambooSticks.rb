@@ -1,10 +1,19 @@
-def setup_frontend_framework_layout
-  inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
-    <<-HTML
+def setup_frontend_framework_layout(devise_option)
+  if devise_option
+    inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
+      <<-HTML
 
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/flashes' %>
-    HTML
+        <%= render 'shared/navbar' %>
+        <%= render 'shared/flashes' %>
+      HTML
+    end
+  else
+    inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
+      <<-HTML
+
+        <%= render 'shared/flashes' %>
+      HTML
+    end
   end
 
   # App controller
@@ -17,11 +26,11 @@ def setup_frontend_framework_layout
   RUBY
 end
 
-def setup_bootstrap_framework
+def setup_bootstrap_framework(devise_option)
   # Flashes & Navbar
   ########################################
   run 'mkdir app/views/shared'
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
 
   # Webpacker / Yarn
@@ -64,11 +73,11 @@ def setup_bootstrap_framework
   end
 end
 
-def setup_tailwind_framework
+def setup_tailwind_framework(devise_option)
   # Flashes & Navbar
   ########################################
   run 'mkdir app/views/shared'
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
 
   # Setup + Dependencies
@@ -317,9 +326,16 @@ end
 run 'mv app/assets/bamboosticks-master/.github .github'
 run 'rm -rf app/assets/bamboosticks-master'
 
+if !devise_option
+  run 'rm -rf app/assets/stylesheets/components/_navbar.scss'
+  gsub_file('app/assets/stylesheets/components/_index.scss', '@import "navbar";', '')
+end
+
 # Dev environment
 ########################################
 gsub_file('config/environments/development.rb', /config\.assets\.debug.*/, 'config.assets.debug = false')
+
+
 
 # Layout
 ########################################
@@ -395,9 +411,9 @@ after_bundle do
 
   # Options Setup
   ########################################
-  setup_frontend_framework_layout
-  setup_bootstrap_framework if bootstrap_option
-  setup_tailwind_framework if tailwind_option
+  setup_frontend_framework_layout(devise_option)
+  setup_bootstrap_framework(devise_option) if bootstrap_option
+  setup_tailwind_framework(devise_option) if tailwind_option
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
