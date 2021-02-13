@@ -1,48 +1,6 @@
-def setup_devise_authentication
-  # Devise install + User
-  ########################################
-  generate('devise:install')
-  generate('devise', 'User')
+# TODO: What happens if we want a framework and no devise? Need backup for navbar signed_in? method
 
-  # Flashes & Navbar
-  ########################################
-  file 'app/views/shared/_flashes.html.erb', <<~HTML
-    <% if notice %>
-      <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-        <%= notice %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    <% if alert %>
-      <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
-        <%= alert %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    <% if success %>
-      <div class="alert alert-success alert-dismissible fade show m-1" role="alert">
-        <%= success %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    <% if info %>
-      <div class="alert alert-primary alert-dismissible fade show m-1" role="alert">
-        <%= info %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-  HTML
-
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/_navbar.html.erb > app/views/shared/_navbar.html.erb'
-
+def setup_frontend_framework
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
       <%= render 'shared/navbar' %>
@@ -59,6 +17,66 @@ def setup_devise_authentication
       add_flash_types :info, :success
     end
   RUBY
+
+  setup_bootstrap_framework if bootstrap_option
+  setup_tailwind_framework if bootstrap_option
+end
+
+def setup_bootstrap_framework
+  # Flashes & Navbar
+  ########################################
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
+
+  # Webpacker / Yarn
+  ########################################
+  run 'yarn add popper.js jquery bootstrap'
+
+  append_file 'app/javascript/packs/application.js', <<~JS
+
+    // ----------------------------------------------------
+    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
+    // WRITE YOUR OWN JS STARTING FROM HERE 👇
+    // ----------------------------------------------------
+
+    // External imports
+    import "bootstrap";
+
+    // Internal imports, e.g:
+    // import { initSelect2 } from '../components/init_select2';
+
+    document.addEventListener('turbolinks:load', () => {
+      // Call your functions here, e.g:
+      // initSelect2();
+    });
+  JS
+
+  inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
+    <<~JS
+      const webpack = require('webpack');
+      // Preventing Babel from transpiling NodeModules packages
+      environment.loaders.delete('nodeModules');
+      // Bootstrap 4 has a dependency over jQuery & Popper.js:
+      environment.plugins.prepend('Provide',
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          Popper: ['popper.js', 'default']
+        })
+      );
+    JS
+  end
+end
+
+def setup_tailwind_framework
+ # TODO
+end
+
+def setup_devise_authentication
+  # Devise install + User
+  ########################################
+  generate('devise:install')
+  generate('devise', 'User')
 
   # Migrate & Devise views
   ########################################
@@ -132,12 +150,35 @@ def pick_simple_option
   end
 end
 
+def pick_framework
+  option = ask 'pick a number'
+  case option
+  when '1' then return 'bootstrap'
+  when '2' then return 'tailwind'
+  else
+    say 'Invalid - please pick a number from the list'
+    pick_framework
+  end
+end
+
+def bootstrap_option
+  selected_framework == 'bootstrap'
+end
+
+def tailwind_option
+  selected_framework == 'tailwind'
+end
+
 say
 say
 say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
 say 'a setup developed by MangoTree 🥭🌴 to support you in your development'
 say
 say 'Tell us a bit about how you want to set up your app:'
+say 'What UI framework would you like to use? 🏗'
+say '1 - Bootstrap'
+say '2 - Tailwind'
+selected_framework = pick_framework
 say 'Would you like to implement devise for authentication? [yn] 🤠'
 devise_option = pick_simple_option
 if devise_option
@@ -204,7 +245,14 @@ run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
 run 'curl -L https://github.com/mangotreedev/bamboosticks/archive/master.zip > stylesheets.zip'
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip'
-run 'mv app/assets/bamboosticks-master/stylesheets app/assets/stylesheets'
+
+run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/stylesheets' if bootstrap_option
+
+if tailwind_option
+  run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
+  run 'mv app/assets/bamboosticks-master/tailwind_stylesheets/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+end
+
 run 'mv app/assets/bamboosticks-master/.github .github'
 run 'rm -rf app/assets/bamboosticks-master'
 
@@ -262,7 +310,9 @@ after_bundle do
   # Generators: db + simple form + pages controller
   ########################################
   rails_command 'db:drop db:create db:migrate'
-  generate('simple_form:install', '--bootstrap')
+
+  generate('simple_form:install', '--bootstrap') if bootstrap_option
+
   generate(:controller, 'pages', 'home kitchensink', '--skip-routes', '--no-test-framework')
 
   # Routes
@@ -284,6 +334,7 @@ after_bundle do
 
   # Options Setup
   ########################################
+  setup_frontend_framework
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
@@ -292,45 +343,6 @@ after_bundle do
   ########################################
   environment 'config.action_mailer.default_url_options = { host: "http://localhost:3000" }', env: 'development'
   environment 'config.action_mailer.default_url_options = { host: "http://TODO_PUT_YOUR_DOMAIN_HERE" }', env: 'production'
-
-  # Webpacker / Yarn
-  ########################################
-  run 'yarn add popper.js jquery bootstrap'
-  append_file 'app/javascript/packs/application.js', <<~JS
-
-
-    // ----------------------------------------------------
-    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
-    // WRITE YOUR OWN JS STARTING FROM HERE 👇
-    // ----------------------------------------------------
-
-    // External imports
-    import "bootstrap";
-
-    // Internal imports, e.g:
-    // import { initSelect2 } from '../components/init_select2';
-
-    document.addEventListener('turbolinks:load', () => {
-      // Call your functions here, e.g:
-      // initSelect2();
-    });
-  JS
-
-  inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
-    <<~JS
-      const webpack = require('webpack');
-      // Preventing Babel from transpiling NodeModules packages
-      environment.loaders.delete('nodeModules');
-      // Bootstrap 4 has a dependency over jQuery & Popper.js:
-      environment.plugins.prepend('Provide',
-        new webpack.ProvidePlugin({
-          $: 'jquery',
-          jQuery: 'jquery',
-          Popper: ['popper.js', 'default']
-        })
-      );
-    JS
-  end
 
   # Bullet Configuration
   ########################################
@@ -414,7 +426,6 @@ after_bundle do
   # Rubocop
   ########################################
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/.rubocop.yml > .rubocop.yml'
-
 
   # Git
   ########################################
