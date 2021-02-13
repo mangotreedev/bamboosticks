@@ -1,5 +1,3 @@
-# TODO: What happens if we want a framework and no devise? Need backup for navbar signed_in? method
-
 def setup_frontend_framework
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
@@ -161,14 +159,6 @@ def pick_framework
   end
 end
 
-def bootstrap_option
-  selected_framework == 'bootstrap'
-end
-
-def tailwind_option
-  selected_framework == 'tailwind'
-end
-
 say
 say
 say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
@@ -179,6 +169,10 @@ say 'What UI framework would you like to use? 🏗'
 say '1 - Bootstrap'
 say '2 - Tailwind'
 selected_framework = pick_framework
+
+bootstrap_option = selected_framework == 'bootstrap'
+selected_framework = selected_framework == 'tailwind'
+
 say 'Would you like to implement devise for authentication? [yn] 🤠'
 devise_option = pick_simple_option
 if devise_option
@@ -188,7 +182,6 @@ end
 say 'Would you like to implement stimulus for javascript? [yn] 🥳'
 stimulus_option = pick_simple_option
 say
-
 
 run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 
