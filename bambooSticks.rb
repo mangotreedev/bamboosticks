@@ -1,6 +1,7 @@
 def setup_frontend_framework_layout
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
+
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
     HTML
@@ -64,9 +65,19 @@ def setup_bootstrap_framework
 end
 
 def setup_tailwind_framework
- run 'yarn add tailwindcss@latest postcss@latest autoprefixer@latest'
+  # Flashes & Navbar
+  ########################################
+  run 'mkdir app/views/shared'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
 
- remove_file 'postcss.config.js'
+  # Setup + Dependencies
+  ########################################
+  run 'yarn add tailwindcss@latest postcss@latest autoprefixer@latest'
+
+  # Config
+  ########################################
+  remove_file 'postcss.config.js'
 
   file 'postcss.config.js', <<-JS
     module.exports = {
@@ -115,24 +126,6 @@ def setup_tailwind_framework
       initAlerts();
     });
   JS
-
-
-
-  # inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
-  #   <<~JS
-  #     const webpack = require('webpack');
-  #     // Preventing Babel from transpiling NodeModules packages
-  #     environment.loaders.delete('nodeModules');
-  #     // Bootstrap 4 has a dependency over jQuery & Popper.js:
-  #     environment.plugins.prepend('Provide',
-  #       new webpack.ProvidePlugin({
-  #         $: 'jquery',
-  #         jQuery: 'jquery',
-  #         Popper: ['popper.js', 'default']
-  #       })
-  #     );
-  #   JS
-  # end
 end
 
 def setup_devise_authentication
@@ -141,12 +134,11 @@ def setup_devise_authentication
   generate('devise:install')
   generate('devise', 'User')
 
-  # Migrate & Devise views
+  # Migrate + Views
   ########################################
   rails_command 'db:migrate'
-  say "Finishing migration..."
-  sleep(3)
-  generate('devise:views')
+  run "spring stop" # Fix hangtime
+  run 'rails generate devise:views'
 
   # App controller
   inject_into_file 'app/controllers/application_controller.rb', after: 'ActionController::Base' do
@@ -319,7 +311,7 @@ if tailwind_option
   run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
   run 'mv app/assets/bamboosticks-master/tailwind/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
   run 'mkdir app/javascript/components'
-  run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlert.js'
+  run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
 end
 
 run 'mv app/assets/bamboosticks-master/.github .github'
