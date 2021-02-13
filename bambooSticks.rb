@@ -64,7 +64,75 @@ def setup_bootstrap_framework
 end
 
 def setup_tailwind_framework
- # TODO
+ run 'yarn add tailwindcss@latest postcss@latest autoprefixer@latest'
+
+ remove_file 'postcss.config.js'
+
+  file 'postcss.config.js', <<-JS
+    module.exports = {
+      plugins: [
+        require('tailwindcss')('./app/javascript/stylesheets/tailwind.config.js'),
+        require('postcss-import'),
+        require('postcss-flexbugs-fixes'),
+        require('postcss-preset-env')({
+          autoprefixer: {
+            flexbox: 'no-2009'
+          },
+          stage: 3
+        })
+      ]
+    }
+  JS
+
+  run 'npx tailwindcss init --full'
+  run 'mkdir app/javascript/stylesheets'
+  run 'mv tailwind.config.js app/javascript/stylesheets/tailwind.config.js'
+  run 'touch app/javascript/stylesheets/application.scss'
+
+  append_file 'app/javascript/stylesheets/application.scss', <<~SCSS
+    @import "tailwindcss/base";
+    @import "tailwindcss/components";
+    @import "tailwindcss/utilities";
+  SCSS
+
+  append_file 'app/javascript/packs/application.js', <<~JS
+
+    // ----------------------------------------------------
+    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
+    // WRITE YOUR OWN JS STARTING FROM HERE 👇
+    // ----------------------------------------------------
+
+    // Tailwind import
+    import "../stylesheets/application"
+
+    // Internal imports, e.g:
+    // import { initSelect2 } from '../components/init_select2';
+    import initAlerts from '../components/initAlerts';
+
+    document.addEventListener('turbolinks:load', () => {
+      // Call your functions here, e.g:
+      // initSelect2();
+      initAlerts();
+    });
+  JS
+
+
+
+  # inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
+  #   <<~JS
+  #     const webpack = require('webpack');
+  #     // Preventing Babel from transpiling NodeModules packages
+  #     environment.loaders.delete('nodeModules');
+  #     // Bootstrap 4 has a dependency over jQuery & Popper.js:
+  #     environment.plugins.prepend('Provide',
+  #       new webpack.ProvidePlugin({
+  #         $: 'jquery',
+  #         jQuery: 'jquery',
+  #         Popper: ['popper.js', 'default']
+  #       })
+  #     );
+  #   JS
+  # end
 end
 
 def setup_devise_authentication
@@ -249,7 +317,9 @@ run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/styleshe
 
 if tailwind_option
   run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
-  run 'mv app/assets/bamboosticks-master/tailwind_stylesheets/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+  run 'mv app/assets/bamboosticks-master/tailwind/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+  run 'mkdir app/javascript/components'
+  run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlert.js'
 end
 
 run 'mv app/assets/bamboosticks-master/.github .github'
