@@ -1,4 +1,4 @@
-def setup_frontend_framework
+def setup_frontend_framework_layout
   inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
     <<-HTML
       <%= render 'shared/navbar' %>
@@ -11,18 +11,15 @@ def setup_frontend_framework
   run 'rm app/controllers/application_controller.rb'
   file 'app/controllers/application_controller.rb', <<~RUBY
     class ApplicationController < ActionController::Base
-    #{  "protect_from_forgery with: :exception\n" if Rails.version < "5.2"}  before_action :authenticate_user!
       add_flash_types :info, :success
     end
   RUBY
-
-  setup_bootstrap_framework if bootstrap_option
-  setup_tailwind_framework if tailwind_option
 end
 
 def setup_bootstrap_framework
   # Flashes & Navbar
   ########################################
+  run 'mkdir app/views/shared'
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb'
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
 
@@ -79,7 +76,16 @@ def setup_devise_authentication
   # Migrate & Devise views
   ########################################
   rails_command 'db:migrate'
+  say "Finishing migration..."
+  sleep(3)
   generate('devise:views')
+
+  # App controller
+  inject_into_file 'app/controllers/application_controller.rb', after: 'ActionController::Base' do
+    <<-RUBY
+      #{  "protect_from_forgery with: :exception\n" if Rails.version < "5.2"} \n  before_action :authenticate_user!
+    RUBY
+  end
 
   # Pages Controller
   ########################################
@@ -327,7 +333,9 @@ after_bundle do
 
   # Options Setup
   ########################################
-  setup_frontend_framework
+  setup_frontend_framework_layout
+  setup_bootstrap_framework if bootstrap_option
+  setup_tailwind_framework if tailwind_option
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
