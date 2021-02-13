@@ -171,7 +171,7 @@ say '2 - Tailwind'
 selected_framework = pick_framework
 
 bootstrap_option = selected_framework == 'bootstrap'
-selected_framework = selected_framework == 'tailwind'
+tailwind_option = selected_framework == 'tailwind'
 
 say 'Would you like to implement devise for authentication? [yn] 🤠'
 devise_option = pick_simple_option
