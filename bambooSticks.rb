@@ -297,6 +297,12 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   RUBY
 end
 
+inject_into_file 'Gemfile', after: "gem 'selenium-webdriver'" do
+  <<-RUBY
+  gem 'capybara-screenshot'
+  RUBY
+end
+
 inject_into_file 'Gemfile', after: 'group :development do' do
   <<-RUBY
   gem 'bullet'
@@ -480,6 +486,15 @@ after_bundle do
           with.library :rails
         end
       end
+
+      # Capybara save screenshot on failure in tmp folder
+      Capybara::Screenshot.autosave_on_failure = true
+
+      # Comment in :selenium, to view tests manually
+      # Comment in :selenium_chrome_headless to run all tests with selenium as opposed to :rack_test
+      # Capybara.default_driver = :selenium
+      # Capybara.default_driver = :selenium_chrome_headless
+      Capybara.javascript_driver = :selenium_chrome_headless
     RUBY
   end
 
