@@ -284,6 +284,7 @@ end if pundit_option
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
+
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
@@ -297,8 +298,16 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   RUBY
 end
 
+inject_into_file 'Gemfile', after: "gem 'selenium-webdriver'" do
+  <<-RUBY
+
+  gem 'capybara-screenshot'
+  RUBY
+end
+
 inject_into_file 'Gemfile', after: 'group :development do' do
   <<-RUBY
+
   gem 'bullet'
   # Comment in when ready to see page load times
   # gem 'rack-mini-profiler'
@@ -442,27 +451,46 @@ after_bundle do
   run 'rm -rf test'
   generate('rspec:install')
 
+  # Capybara configuration for rails helper
+  inject_into_file 'spec/rails_helper.rb', after: "require 'spec_helper'" do
+    <<~RUBY
+
+    require 'capybara/rspec'
+    require 'capybara-screenshot/rspec'
+
+    RUBY
+  end
+
   # Database Cleaner & Factory Bot configuration
   inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
     <<~RUBY
       # DatabaseCleaner with AR configuration
       config.before(:suite) do
-        DatabaseCleaner.strategy = :truncation
         DatabaseCleaner.clean_with(:truncation)
       end
 
-      config.before do
+      config.before(:each) do
         DatabaseCleaner.strategy = :transaction
+      end
+
+      config.before(:each, :js => true) do
+        DatabaseCleaner.strategy = :truncation
+      end
+
+      config.before(:each) do
         DatabaseCleaner.start
       end
 
-      config.append_after do
+      config.after(:each) do
         DatabaseCleaner.clean
       end
       # Factory Bot configuration
       config.include FactoryBot::Syntax::Methods
     RUBY
   end
+
+  # Adjust transactional_fixtures for database cleaner config above
+  gsub_file 'spec/rails_helper.rb', 'config.use_transactional_fixtures = true', 'config.use_transactional_fixtures = false'
 
   # Shoulda Matchers configuration
   append_file 'spec/rails_helper.rb' do
@@ -474,6 +502,15 @@ after_bundle do
           with.library :rails
         end
       end
+
+      # Capybara save screenshot on failure in tmp folder
+      Capybara::Screenshot.autosave_on_failure = true
+
+      # Comment in :selenium, to view tests manually
+      # Comment in :selenium_chrome_headless to run all tests with selenium as opposed to :rack_test
+      # Capybara.default_driver = :selenium
+      # Capybara.default_driver = :selenium_chrome_headless
+      Capybara.javascript_driver = :selenium_chrome_headless
     RUBY
   end
 
