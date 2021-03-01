@@ -284,6 +284,7 @@ end if pundit_option
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
+
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
@@ -299,12 +300,14 @@ end
 
 inject_into_file 'Gemfile', after: "gem 'selenium-webdriver'" do
   <<-RUBY
+
   gem 'capybara-screenshot'
   RUBY
 end
 
 inject_into_file 'Gemfile', after: 'group :development do' do
   <<-RUBY
+
   gem 'bullet'
   # Comment in when ready to see page load times
   # gem 'rack-mini-profiler'
@@ -451,6 +454,7 @@ after_bundle do
   # Capybara configuration for rails helper
   inject_into_file 'spec/rails_helper.rb', after: "require 'spec_helper'" do
     <<~RUBY
+
     require 'capybara/rspec'
     require 'capybara-screenshot/rspec'
 
