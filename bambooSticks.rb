@@ -448,6 +448,15 @@ after_bundle do
   run 'rm -rf test'
   generate('rspec:install')
 
+  # Capybara configuration for rails helper
+  inject_into_file 'spec/rails_helper.rb', after: "require 'spec_helper'" do
+    <<~RUBY
+    require 'capybara/rspec'
+    require 'capybara-screenshot/rspec'
+
+    RUBY
+  end
+
   # Database Cleaner & Factory Bot configuration
   inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
     <<~RUBY
