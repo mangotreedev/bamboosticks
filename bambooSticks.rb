@@ -489,6 +489,9 @@ after_bundle do
     RUBY
   end
 
+  # Adjust transactional_fixtures for database cleaner config above
+  gsub_file 'spec/rails_helper.rb', 'config.use_transactional_fixtures = true', 'config.use_transactional_fixtures = false'
+
   # Shoulda Matchers configuration
   append_file 'spec/rails_helper.rb' do
     <<~RUBY
