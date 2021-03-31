@@ -22,13 +22,6 @@ This repository's issues are reserved for feature requests, bug reports, and sup
 - [ ] support request
 
 
-
-## Do you want to request *support*, a *feature*, or report a *bug*? :bug:
-
-
-
-
-
 ## What is the current behavior? :dancers:
 
 
