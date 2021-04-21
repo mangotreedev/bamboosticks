@@ -20,6 +20,7 @@ Please delete options that are not relevant.
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Configuration (non-breaking change which sets up application for environs)
 - [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] Styling (non-breaking style changes)
 
 ## How Has This Been Tested? :microscope:
 Please describe the tests that you ran to verify your changes.  Please also list any relevant details for your test configuration
