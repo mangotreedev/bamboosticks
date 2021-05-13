@@ -26,7 +26,7 @@ def setup_frontend_framework_layout(devise_option)
   RUBY
 end
 
-def setup_bootstrap_framework(devise_option)
+def install_bootstrap_last_version(devise_option, use_last_version)
   # Flashes & Navbar
   ########################################
   run 'mkdir app/views/shared'
@@ -35,12 +35,12 @@ def setup_bootstrap_framework(devise_option)
 
   # Webpacker / Yarn
   ########################################
-  run 'yarn add popper.js jquery bootstrap'
+  run 'yarn add yarn add @popperjs/core bootstrap'
 
   append_file 'app/javascript/packs/application.js', <<~JS
 
     // ----------------------------------------------------
-    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
+    // Note: ABOVE IS RAILS DEFAULT CONFIGURATION
     // WRITE YOUR OWN JS STARTING FROM HERE 👇
     // ----------------------------------------------------
 
@@ -70,6 +70,61 @@ def setup_bootstrap_framework(devise_option)
         })
       );
     JS
+  end
+end
+
+def install_bootstrap_old_version(devise_option, use_last_version)
+  # Flashes & Navbar
+  ########################################
+  run 'mkdir app/views/shared'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout-v4.6/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/bootstrap/layout-v4.6/_flashes.html.erb > app/views/shared/_flashes.html.erb'
+
+  # Webpacker / Yarn
+  ########################################
+  run 'yarn add popper.js jquery bootstrap@4.6'
+
+  append_file 'app/javascript/packs/application.js', <<~JS
+
+    // ----------------------------------------------------
+    // Note: ABOVE IS RAILS DEFAULT CONFIGURATION
+    // WRITE YOUR OWN JS STARTING FROM HERE 👇
+    // ----------------------------------------------------
+
+    // External imports
+    import "bootstrap";
+
+    // Internal imports, e.g:
+    // import { initSelect2 } from '../components/init_select2';
+
+    document.addEventListener('turbolinks:load', () => {
+      // Call your functions here, e.g:
+      // initSelect2();
+    });
+  JS
+
+  inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
+    <<~JS
+      const webpack = require('webpack');
+      // Preventing Babel from transpiling NodeModules packages
+      environment.loaders.delete('nodeModules');
+      // Bootstrap 4 has a dependency over jQuery & Popper.js:
+      environment.plugins.prepend('Provide',
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          Popper: ['popper.js', 'default']
+        })
+      );
+    JS
+  end
+end
+
+def setup_bootstrap_framework(devise_option, use_last_version)
+  if use_last_version
+    install_bootstrap_last_version(devise_option, use_last_version)
+  else
+    install_bootstrap_old_version(devise_option, use_last_version)
   end
 end
 
@@ -234,6 +289,18 @@ def pick_framework
   end
 end
 
+def pick_bootstrap_version
+  option = ask '>> '
+
+  case option
+  when 'Bootstrap v5.0' then return true
+  when 'Bootstrap v4.6' then return false
+  else
+    say 'Invalid - please pick a number from the list'
+    pick_bootstrap_version
+  end
+end
+
 say
 say
 say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
@@ -247,6 +314,11 @@ selected_framework = pick_framework
 
 bootstrap_option = selected_framework == 'bootstrap'
 tailwind_option = selected_framework == 'tailwind'
+
+if bootstrap_option
+  say "Which version of Bootstrap do you want to use?"
+  bootstrap_last_version = pick_bootstrap_version
+end
 
 say 'Would you like to implement devise for authentication? [yn] 🤠'
 devise_option = pick_simple_option
@@ -421,7 +493,7 @@ after_bundle do
   # Options Setup
   ########################################
   setup_frontend_framework_layout(devise_option)
-  setup_bootstrap_framework(devise_option) if bootstrap_option
+  setup_bootstrap_framework(devise_option, bootstrap_last_version) if bootstrap_option
   setup_tailwind_framework(devise_option) if tailwind_option
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
