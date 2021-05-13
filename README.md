@@ -23,7 +23,7 @@ If you would like to see something added in or want to understand more on why we
 - [Simple Form](https://github.com/heartcombo/simple_form) - rails forms made easy
 
 ## FrontEnd Frameworks options :nail_care:
-- [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world.
+- [Bootstrap](https://getbootstrap.com/) - The most popular HTML, CSS, and JS library in the world. Option to choose v5.0 or v4.6
 - [TailwindCSS](https://tailwindcss.com/) - Rapidly build modern websites without ever leaving your HTML.
 
 ## Optional gems :gem:
