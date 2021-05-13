@@ -64,8 +64,6 @@ def install_bootstrap_last_version(devise_option, use_last_version)
       // Bootstrap 4 has a dependency over jQuery & Popper.js:
       environment.plugins.prepend('Provide',
         new webpack.ProvidePlugin({
-          $: 'jquery',
-          jQuery: 'jquery',
           Popper: ['popper.js', 'default']
         })
       );
@@ -293,8 +291,8 @@ def pick_bootstrap_version
   option = ask '>> '
 
   case option
-  when 'Bootstrap v5.0' then return true
-  when 'Bootstrap v4.6' then return false
+  when '1' then return true
+  when '2' then return false
   else
     say 'Invalid - please pick a number from the list'
     pick_bootstrap_version
@@ -317,6 +315,8 @@ tailwind_option = selected_framework == 'tailwind'
 
 if bootstrap_option
   say "Which version of Bootstrap do you want to use?"
+  say '1 - Bootstrap v5.0'
+  say '2 - Bootstrap v4.6'
   bootstrap_last_version = pick_bootstrap_version
 end
 
@@ -615,11 +615,11 @@ after_bundle do
   ########################################
   run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/.rubocop.yml > .rubocop.yml'
 
+  # Fix puma config
+  gsub_file('config/puma.rb', 'pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }', '# pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }')
+
   # Git
   ########################################
   git add: '.'
   git commit: "-m 'ARCH: Base rails app generation using BambooSticks'"
-
-  # Fix puma config
-  gsub_file('config/puma.rb', 'pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }', '# pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }')
 end
