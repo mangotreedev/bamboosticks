@@ -158,13 +158,16 @@ def setup_tailwind_framework(devise_option)
   JS
 
   run 'mkdir app/javascript/stylesheets'
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/tailwind.config.js > app/javascript/stylesheets/tailwind.config.js'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/config/tailwind.config.js > app/javascript/stylesheets/tailwind.config.js'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/config/_fonts.scss > app/javascript/stylesheets/_fonts.scss'
   run 'touch app/javascript/stylesheets/application.scss'
 
   append_file 'app/javascript/stylesheets/application.scss', <<~SCSS
     @import "tailwindcss/base";
     @import "tailwindcss/components";
     @import "tailwindcss/utilities";
+
+    @import "fonts";
   SCSS
 
   append_file 'app/javascript/packs/application.js', <<~JS
@@ -472,6 +475,7 @@ after_bundle do
 
   generate(:controller, 'pages', 'home kitchensink', '--skip-routes', '--no-test-framework')
 
+  # TODO
   # Routes
   ########################################
   route "root to: 'pages#home'"
