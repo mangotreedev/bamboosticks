@@ -1,0 +1,37 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+// Define font size and weight for body and headers (golden ratio)
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold mb-3;
+  }
+
+  h1 {
+    @apply text-8xl;
+  }
+
+  h2 {
+    @apply text-6xl;
+  }
+
+  h3 {
+    @apply text-5xl;
+  }
+
+  h4 {
+    @apply text-4xl;
+  }
+
+  h5 {
+    @apply text-3xl;
+  }
+
+  h6 {
+    @apply text-xl;
+  }
+
+  p, li {
+    @apply font-light;
+  }
+}
