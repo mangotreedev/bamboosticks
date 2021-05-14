@@ -157,9 +157,8 @@ def setup_tailwind_framework(devise_option)
     }
   JS
 
-  run 'npx tailwindcss init --full'
   run 'mkdir app/javascript/stylesheets'
-  run 'mv tailwind.config.js app/javascript/stylesheets/tailwind.config.js'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/tailwind/tailwind.config.js > app/javascript/stylesheets/tailwind.config.js'
   run 'touch app/javascript/stylesheets/application.scss'
 
   append_file 'app/javascript/stylesheets/application.scss', <<~SCSS
