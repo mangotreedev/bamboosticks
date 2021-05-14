@@ -401,7 +401,7 @@ run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/styleshe
 
 if tailwind_option
   run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
-  run 'mv app/assets/bamboosticks-master/tailwind/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+  run 'mv app/assets/bamboosticks-master/tailwind/config/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
   run 'mkdir app/javascript/components'
   run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
 end
