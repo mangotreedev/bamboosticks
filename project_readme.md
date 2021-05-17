@@ -1,5 +1,7 @@
 <p align="center">
-  👉🏻 PLEASE UPDATE W/ YOUR PROJECT LOGO 👈🏻
+  [REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO]
+  <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+  [REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO]
 </p>
 
 <h1 align="center">
@@ -101,20 +103,83 @@ Some subheaders to include are:
 
 #### Development notes - list out design decisions and funny things that stick outside of normal design
 
-## 🧱 Pull Request <a name="pull-request"></a>
-When creating a pull request, you'll find a default template generated so please make sure you complete it accordingly.
 
-## 💿 DB Schema <a name="db-schema"></a>
-Please find below the latest database schema:
+## Password Log
 
-[REPLACE WITH PICTURE OF YOUR DB SCHEMA AND RETURN THE MANGO]
+[👉 Passwords Link 👈](www.google.com)
+👉🏻 PLEASE UPDATE W/ YOUR PASSWORD LOG 👈🏻
 
+
+## DB Schema
+
+[👉 Schema Link 👈](www.google.com)
+[REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
 <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+[REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
 
-[REPLACE WITH PICTURE OF YOUR DB SCHEMA AND RETURN THE MANGO]
 
-## 🚢 Kitchen Sink <a name="kitchen-sink"></a>
-We've generated a Kitchensink route, controller action, and view to populate with front-end components, every time you are using a component make sure you use the ones on this UI Kit (or add them if you are creating new ones).
+## Testing
+
+👉🏻 PLEASE CUSTOMIZE AND UPDATED AS NEEDED 👈🏻
+[![Test Count](https://img.shields.io/badge/total%20tests-100-blue)]()
+[![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
+
+To run the test suite run:
+```
+bundle exec rspec
+```
+
+To view the coverage report run:
+```
+open coverage/index.html
+```
+
+<p align="center">
+  [REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO]
+  <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+  [REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO]
+</p>
+
+Testing philosophy is based off off the Classic Approach or Chicago School a.k.a Inside Out TDD.
+
+The levels covered range from unit/models, requests, and features.  It also includes additional coverage along jobs, mailers, presenters, and services.
+
+The primary toolset is managed by rspec; test data is managed by factorybot; coverage is managed by simplecov; cleaning is managed by database_cleaner; and additional services are provided by shoulda-matchers.
+
+The primary web driver is handled by capybara.
+
+If you implement any new features please validate all tests pass prior to pushing your branch.  If you submit a pull request please validate all test pass successfully on the github action workflow.  You should see a green check by the last commit if all tests have passed.
+
+
+## Visual Design Philosophy
+
+[PLEASE REPLACE]
+
+Insert App Summary (1-2 paragraphs) and list out main facets of the application with brief descriptions
+
+[PLEASE REPLACE]
+
+We've generated a Kitchensink route, controller action, and view to populate with front-end components. Every time you are using a component make sure you use the ones from the kitchen sink (or add them if you are creating new ones).
+
+## External Services
+
+* Please
+* Provide
+* The List Of
+* External
+* Services
+* Used
+
+## Contributing
+
+If you are joining the team and wish to contribute please follow three simple philosophies
+1) Maintain code coverage levels, following the inside out approach
+2) Descriptive pull requests using the built in template, and no one merges their own requests
+3) Follow any and all design patterns or philosophies when available
+
+
+
+
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
