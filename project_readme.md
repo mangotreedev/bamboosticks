@@ -44,7 +44,7 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 
 This application is using:
 * Ruby 2.6.6
-* Rails 6.0.3
+* Rails 6.1.3
 <p>
   🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
