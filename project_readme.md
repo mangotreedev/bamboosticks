@@ -1,18 +1,31 @@
-# 👉🏻 PLEASE UPDATE ME WITH PROJECT NAME 👈🏻
+<p align="center">
+  👉🏻 PLEASE UPDATE W/ YOUR PROJECT LOGO 👈🏻
+</p>
 
-## 🚀 General info
+<h1 align="center">
+  Readme & Documentation
+</h1>
+
 [PLEASE REPLACE]
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Insert App Summary (1-2 paragraphs) and list out main facets of the application with brief descriptions
 
 [PLEASE REPLACE]
 
-## 📝 Table of contents
-* [Technologies](#technologies)
-* [Setup](#setup)
-* [Pull request](#pull-request)
-* [DB Schema](#db-schema)
-* [Kitchen Sink](#kitchen-sink)
+## Table of Contents
+
+0. [Build Status](#build-status)
+1. [Environment Setup](#environment-setup)
+2. [Primary Function One](#primary-function-one)
+3. [Primary Function Two](#primary-function-two)
+4. [Primary Function Three](#primary-function-three)
+5. [Password Log](#password-log)
+6. [DB Schema](#db-schema)
+7. [Testing](#testing)
+8. [Visual Design Philosophy](#visual-design-philosophy)
+9. [External Services](#external-services)
+10. [Contributing](#contributing)
+11. [License](#license)
 
 ## Technologies 🧰 <a name="technologies"></a>
 
