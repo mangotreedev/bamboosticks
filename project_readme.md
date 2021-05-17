@@ -2,18 +2,17 @@
   <img width="400" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
 </p>
 <p align="center">
-  [REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO]
+  🛑 TODO: REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO
 </p>
 
 <h1 align="center">
   Readme & Documentation
 </h1>
 
-[PLEASE REPLACE]
+🛑 TODO: PLEASE REPLACE
 
 Insert App Summary (1-2 paragraphs) and list out main facets of the application with brief descriptions
 
-[PLEASE REPLACE]
 
 ## Table of Contents
 
@@ -37,7 +36,7 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 [![Language](https://img.shields.io/badge/language-ruby-red)]()
 [![Framework](https://img.shields.io/badge/framework-rails-red)]()
 <p>
-  [ PLEASE CUSTOMIZE AS NEEDED ]
+  🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
 
 
@@ -47,7 +46,7 @@ This application is using:
 * Ruby 2.6.6
 * Rails 6.0.3
 <p>
-  [ PLEASE CUSTOMIZE AS NEEDED ]
+  🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
 
 In your terminal, run the following to clone the project onto your local machine:
@@ -55,7 +54,7 @@ In your terminal, run the following to clone the project onto your local machine
 git clone git@github.com:organization/project.git
 ```
 <p>
-  [ PLEASE CUSTOMIZE AS NEEDED ]
+  🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
 
 For the final setup for the packages, gems, remotes, prepping databases, and seed file, run the following:
@@ -117,7 +116,7 @@ Some subheaders to include are:
 
 [👉 Passwords Link 👈](www.google.com)
 <p>
-  [ PLEASE CUSTOMIZE AS NEEDED ]
+  🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
 
 ## DB Schema
@@ -128,12 +127,12 @@ Some subheaders to include are:
   <img width="400" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
 </p>
 <p align="center">
-  [REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
+  🛑 TODO: REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO
 </p>
 
 ## Testing
 <p>
-  [ PLEASE CUSTOMIZE AS NEEDED ]
+  🛑 TODO: PLEASE CUSTOMIZE AS NEEDED
 </p>
 
 [![Test Count](https://img.shields.io/badge/total%20tests-100-blue)]()
@@ -153,7 +152,7 @@ open coverage/index.html
   <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
 </p>
 <p align="center">
-  [REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO]
+  🛑 TODO: REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO
 </p>
 
 Testing philosophy is based off off the Classic Approach or Chicago School a.k.a Inside Out TDD.
@@ -169,13 +168,11 @@ If you implement any new features please validate all tests pass prior to pushin
 
 ## Visual Design Philosophy
 
-[PLEASE REPLACE]
+🛑 TODO: PLEASE REPLACE AND/OR MODIFY
 
 Please provide a visual representation of your app either through a prototype such as figma or through a series of images.
 
 In 1-2 paragraphs please also describe the visual design philosophy such as patterns you'll be using (gradeints, glassmorphism, etc), coding practices (BEM model), and potentially any frameworks (tailwind, bootstrap, bulma, etc)
-
-[PLEASE REPLACE]
 
 We've generated a Kitchensink route, controller action, and view to populate with front-end components. Every time you are using a component make sure you use the ones from the kitchen sink (or add them if you are creating new ones).
 
@@ -199,6 +196,8 @@ If you are joining the team and wish to contribute please follow three simple ph
 
 
 ## License
+🛑 TODO: PLEASE REPLACE AND/OR MODIFY
+
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 Copyright © 202X COMPANY NAME
