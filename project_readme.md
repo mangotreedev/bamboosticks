@@ -1,6 +1,7 @@
 <p align="center">
-  [REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO]
-  <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+  <img width="400" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+</p>
+<p align="center">
   [REPLACE WITH A PICTURE OF YOUR PROJECT LOGO AND RETURN OUR MANGO]
 </p>
 
@@ -35,7 +36,9 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 [![Uptime](https://img.shields.io/badge/uptime-100%25-brightgreen)]()
 [![Language](https://img.shields.io/badge/language-ruby-red)]()
 [![Framework](https://img.shields.io/badge/framework-rails-red)]()
-👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
+<p>
+  [ PLEASE CUSTOMIZE AS NEEDED ]
+</p>
 
 
 ## Environment Setup
@@ -43,13 +46,17 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 This application is using:
 * Ruby 2.6.6
 * Rails 6.0.3
-👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
+<p>
+  [ PLEASE CUSTOMIZE AS NEEDED ]
+</p>
 
 In your terminal, run the following to clone the project onto your local machine:
 ```
 git clone git@github.com:organization/project.git
-👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
 ```
+<p>
+  [ PLEASE CUSTOMIZE AS NEEDED ]
+</p>
 
 For the final setup for the packages, gems, remotes, prepping databases, and seed file, run the following:
 ```
@@ -109,20 +116,26 @@ Some subheaders to include are:
 ## Password Log
 
 [👉 Passwords Link 👈](www.google.com)
-👉🏻 PLEASE UPDATE W/ YOUR PASSWORD LOG 👈🏻
-
+<p>
+  [ PLEASE CUSTOMIZE AS NEEDED ]
+</p>
 
 ## DB Schema
 
 [👉 Schema Link 👈](www.google.com)
-[REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
-<img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
-[REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
 
+<p align="center">
+  <img width="400" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+</p>
+<p align="center">
+  [REPLACE WITH A PICTURE OF YOUR ER DIAGRAM AND RETURN OUR MANGO]
+</p>
 
 ## Testing
+<p>
+  [ PLEASE CUSTOMIZE AS NEEDED ]
+</p>
 
-👉🏻 PLEASE CUSTOMIZE AND UPDATED AS NEEDED 👈🏻
 [![Test Count](https://img.shields.io/badge/total%20tests-100-blue)]()
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 
@@ -137,8 +150,9 @@ open coverage/index.html
 ```
 
 <p align="center">
-  [REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO]
   <img width="200" alt="image" src="https://res.cloudinary.com/nico1711/image/upload/v1613325168/mango.jpg">
+</p>
+<p align="center">
   [REPLACE WITH PICTURES OF YOUR TEST RUNS AND RETURN OUR MANGO]
 </p>
 
