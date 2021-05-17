@@ -27,40 +27,79 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 10. [Contributing](#contributing)
 11. [License](#license)
 
-## Technologies 🧰 <a name="technologies"></a>
+## Build Status
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
+[![Uptime](https://img.shields.io/badge/uptime-100%25-brightgreen)]()
+[![Language](https://img.shields.io/badge/language-ruby-red)]()
+[![Framework](https://img.shields.io/badge/framework-rails-red)]()
+👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
 
-This project was created with:
+## Environment Setup
 
-[PLEASE REPLACE]
-
+This application is using:
 * Ruby 2.6.6
-* Ruby on Rails 6.0.3
+* Rails 6.0.3
+👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
 
-[PLEASE REPLACE]
-
-with the bellow extra packages/gems:
-[PLEASE REPLACE]
-
-* simple_form
-* devise
-* geocoder
-
-[PLEASE REPLACE]
-
-## 🏗 Setup <a name="setup"></a>
-To run this project, install it locally following these steps:
-[PLEASE REPLACE]
-
+In your terminal, run the following to clone the project onto your local machine:
 ```
-git clone git@github.com:someuser/cloned-project.git
-cd cloned-project
+git clone git@github.com:organization/project.git
+👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
+```
+
+For the final setup for the packages, gems, remotes, prepping databases, and seed file, run the following:
+```
 bin/setup
 ```
-❗️Remember to add the required `API` keys for: `WhicheverAPIYouUse`
 
-Note: Ask your Lead Dev for the required keys
+❗️ Remember to add the required `API` keys for: `WhicheverAPIYouUse`
 
-[PLEASE REPLACE]
+Note: Ask your Lead Dev for the required keys or single secret key
+
+
+## Primary Function One
+
+Insert some text to explain this facet or function of the app, make sure to include plenty of photos
+
+Some subheaders to include are:
+
+#### Users for this facet are - your target consumer
+
+#### This facet is where users can - list all actions / user stories
+
+#### Additional features included are - additional services or tools that support the prior
+
+#### Development notes - list out design decisions and funny things that stick outside of normal design
+
+
+## Primary Function Two
+
+Insert some text to explain this facet or function of the app, make sure to include plenty of photos
+
+Some subheaders to include are:
+
+#### Users for this facet are - your target consumer
+
+#### This facet is where users can - list all actions / user stories
+
+#### Additional features included are - additional services or tools that support the prior
+
+#### Development notes - list out design decisions and funny things that stick outside of normal design
+
+
+## Primary Function Three
+
+Insert some text to explain this facet or function of the app, make sure to include plenty of photos
+
+Some subheaders to include are:
+
+#### Users for this facet are - your target consumer
+
+#### This facet is where users can - list all actions / user stories
+
+#### Additional features included are - additional services or tools that support the prior
+
+#### Development notes - list out design decisions and funny things that stick outside of normal design
 
 ## 🧱 Pull Request <a name="pull-request"></a>
 When creating a pull request, you'll find a default template generated so please make sure you complete it accordingly.
