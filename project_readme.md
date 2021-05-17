@@ -37,6 +37,7 @@ Insert App Summary (1-2 paragraphs) and list out main facets of the application 
 [![Framework](https://img.shields.io/badge/framework-rails-red)]()
 👉🏻 PLEASE CUSTOMIZE AS NEEDED 👈🏻
 
+
 ## Environment Setup
 
 This application is using:
@@ -156,11 +157,14 @@ If you implement any new features please validate all tests pass prior to pushin
 
 [PLEASE REPLACE]
 
-Insert App Summary (1-2 paragraphs) and list out main facets of the application with brief descriptions
+Please provide a visual representation of your app either through a prototype such as figma or through a series of images.
+
+In 1-2 paragraphs please also describe the visual design philosophy such as patterns you'll be using (gradeints, glassmorphism, etc), coding practices (BEM model), and potentially any frameworks (tailwind, bootstrap, bulma, etc)
 
 [PLEASE REPLACE]
 
 We've generated a Kitchensink route, controller action, and view to populate with front-end components. Every time you are using a component make sure you use the ones from the kitchen sink (or add them if you are creating new ones).
+
 
 ## External Services
 
@@ -170,6 +174,7 @@ We've generated a Kitchensink route, controller action, and view to populate wit
 * External
 * Services
 * Used
+
 
 ## Contributing
 
