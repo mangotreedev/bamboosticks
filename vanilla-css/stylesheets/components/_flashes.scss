@@ -1,0 +1,28 @@
+.flash-alert {
+  border: 1px solid rgba(229, 231, 235, 1);
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+
+  .flash-content {
+    display: block;
+    margin-right: 2rem;
+  }
+
+  .flash-close {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+  }
+
+  .flash-close svg {
+    fill: currentColor;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}

@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <%= link_to "#" do %>
+    <strong>MANGO</strong>TREE
+  <% end %>
+
+  <input class="menu-btn" type="checkbox" id="menu-btn">
+  <label class="menu-icon" for="menu-btn">
+    <span class="navicon"></span>
+  </label>
+
+  <ul class="menu">
+    <li>
+      <a href="/" class="font-bold">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About</a>
+    </li>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Log In", new_user_session_path %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
