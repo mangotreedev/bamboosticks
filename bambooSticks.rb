@@ -196,8 +196,8 @@ def setup_vanilla_frontend(devise_option)
   # Flashes & Navbar
   ########################################
   run 'mkdir app/views/shared'
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-css/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
-  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-css/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-scss/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-scss/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
 
   append_file 'app/javascript/packs/application.js', <<~JS
 
