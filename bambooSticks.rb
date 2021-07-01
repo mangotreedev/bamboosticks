@@ -427,7 +427,7 @@ run 'curl -L https://github.com/mangotreedev/bamboosticks/archive/master.zip > s
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip'
 
 run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/stylesheets' if bootstrap_option
-run 'mv app/assets/bamboosticks-master/vanilla-css/stylesheets app/assets/stylesheets' if no_framework_option
+run 'mv app/assets/bamboosticks-master/vanilla-scss/stylesheets app/assets/stylesheets' if no_framework_option
 
 if tailwind_option
   run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
