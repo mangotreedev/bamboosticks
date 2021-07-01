@@ -334,7 +334,7 @@ say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
 say 'a setup developed by MangoTree 🥭🌴 to support you in your development'
 say
 say 'Tell us a bit about how you want to set up your app:'
-say 'What UI framework would you like to use? 🏗'
+say 'Which UI framework would you like to use? 🏗'
 say '1 - Bootstrap'
 say '2 - Tailwind'
 say '3 - No framework, thanks!'
