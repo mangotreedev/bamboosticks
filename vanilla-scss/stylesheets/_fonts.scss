@@ -1,0 +1,52 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bolder;
+}
+
+p, li {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 5.5625rem;
+}
+
+h2 {
+  font-size: 4.1875rem;
+}
+
+h3 {
+  font-size: 3.125rem;
+}
+
+h4 {
+  font-size: 2.3125rem;
+}
+
+h5 {
+  font-size: 1.75rem;
+}
+
+h6 {
+  font-size: 1.3125rem;
+}
+
+@media (max-width: 767px) {
+  h1 {
+   font-size: 3.125rem;
+  }
+
+  h2 {
+    font-size: 2.3125rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4, h5, h6 {
+    font-size: 1.3125rem;
+  }
+}

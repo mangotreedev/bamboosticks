@@ -192,6 +192,32 @@ def setup_tailwind_framework(devise_option)
   JS
 end
 
+def setup_vanilla_frontend(devise_option)
+  # Flashes & Navbar
+  ########################################
+  run 'mkdir app/views/shared'
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-scss/layout/_navbar.html.erb > app/views/shared/_navbar.html.erb' if devise_option
+  run 'curl -L https://raw.githubusercontent.com/mangotreedev/bamboosticks/master/vanilla-scss/layout/_flashes.html.erb > app/views/shared/_flashes.html.erb'
+
+  append_file 'app/javascript/packs/application.js', <<~JS
+
+    // ----------------------------------------------------
+    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
+    // WRITE YOUR OWN JS STARTING FROM HERE 👇
+    // ----------------------------------------------------
+
+    // Internal imports, e.g:
+    // import { initSelect2 } from '../components/init_select2';
+    import initAlerts from '../components/initAlerts';
+
+    document.addEventListener('turbolinks:load', () => {
+      // Call your functions here, e.g:
+      // initSelect2();
+      initAlerts();
+    });
+  JS
+end
+
 def setup_devise_authentication
   # Devise install + User
   ########################################
@@ -283,6 +309,7 @@ def pick_framework
   case option
   when '1' then return 'bootstrap'
   when '2' then return 'tailwind'
+  when '3' then return 'no-framework'
   else
     say 'Invalid - please pick a number from the list'
     pick_framework
@@ -307,13 +334,15 @@ say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
 say 'a setup developed by MangoTree 🥭🌴 to support you in your development'
 say
 say 'Tell us a bit about how you want to set up your app:'
-say 'What UI framework would you like to use? 🏗'
+say 'Which UI framework would you like to use? 🏗'
 say '1 - Bootstrap'
 say '2 - Tailwind'
+say '3 - No framework, thanks!'
 selected_framework = pick_framework
 
 bootstrap_option = selected_framework == 'bootstrap'
 tailwind_option = selected_framework == 'tailwind'
+no_framework_option = selected_framework == 'no-framework'
 
 if bootstrap_option
   say "Which version of Bootstrap do you want to use?"
@@ -398,10 +427,14 @@ run 'curl -L https://github.com/mangotreedev/bamboosticks/archive/master.zip > s
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip'
 
 run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/stylesheets' if bootstrap_option
+run 'mv app/assets/bamboosticks-master/vanilla-scss/stylesheets app/assets/stylesheets' if no_framework_option
 
 if tailwind_option
   run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
   run 'mv app/assets/bamboosticks-master/tailwind/config/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+end
+
+if tailwind_option || no_framework_option
   run 'mkdir app/javascript/components'
   run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
 end
@@ -492,6 +525,7 @@ after_bundle do
   setup_frontend_framework_layout(devise_option)
   setup_bootstrap_framework(devise_option, bootstrap_last_version) if bootstrap_option
   setup_tailwind_framework(devise_option) if tailwind_option
+  setup_vanilla_frontend(devise_option) if no_framework_option
   setup_devise_authentication if devise_option
   setup_pundit_authorization if pundit_option
   setup_stimulus_framework if stimulus_option
