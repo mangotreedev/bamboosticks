@@ -47,7 +47,7 @@ We've built in a full testing suite revolving around RSpec that gets you off the
 We've generated a Kitchensink route, action and view to populate with front-end components for you and your team
 
 ## Github Actions & Templates :raising_hand:
-Added a customized [template](https://github.com/mangotreedev/templates/blob/master/pull_request_template.md) that's automatically added when you create a pull request on github.
+Added a customized [template](https://github.com/mangotreedev/templates/blob/master/.github/pull_request_template.md) that's automatically added when you create a pull request on github.
 
 Added a customized [template](https://raw.githubusercontent.com/mangotreedev/templates/master/.github/ISSUE_TEMPLATE/request.md) for opening issues in your repo that can be features, support, or bug requests.
 
