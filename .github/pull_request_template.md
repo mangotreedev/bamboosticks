@@ -34,5 +34,5 @@ Please describe the tests that you ran to verify your changes.  Please also list
 ## Photos :see_no_evil:
 Please provide photos of changes made as necessary
 
-_Built with love_ :heart: 
-_By Nico_:wolf: _and Sy_:turtle:
+_Built with love by MangoTree_ :heart: :palm_tree: 
+
