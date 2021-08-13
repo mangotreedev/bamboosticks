@@ -1,7 +1,7 @@
-# MangoTree Rails Template: BambooSticks
+# MangoTree Rails Boilerplate: BambooSticks
 
 ## Description :speak_no_evil:
-BambooSticks is the template we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.
+BambooSticks is the boilerplate we use at MangoTree to generate RoR applications with a basic setup suitable for most web applications.  We hope this template supports you as you begin your application development, just as bamboo sticks support a fledgling plant.
 
 It will take you through a decision tree on which front end framework you want to use, whether or not you want to add devise for authentication, pundit for authorization, and stimulus for JS; so make sure you pay attention while your app is generating!
 
