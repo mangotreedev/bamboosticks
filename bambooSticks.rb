@@ -290,6 +290,23 @@ def setup_stimulus_framework
   # Stimulus Setup
   ########################################
   run 'rails webpacker:install:stimulus'
+  run 'yarn add @hotwired/stimulus-webpack-helpers'
+  run 'rm -rf app/javascript/controllers/index.js'
+  run 'touch app/javascript/controllers/index.js'
+
+  append_file 'app/javascript/controllers/index.js', <<~JS
+    // Load all the controllers within this directory and all subdirectories.
+    // Controller files must be named *_controller.js.
+
+    import { Application } from "@hotwired/stimulus"
+    import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
+
+    const application = Application.start()
+    const context = require.context("controllers", true, /_controller\.js$/)
+    application.load(definitionsFromContext(context))
+  JS
+
+  gsub_file 'app/javascript/controllers/hello_controller.js', 'from "stimulus"', 'from "@hotwired/stimulus"'
 end
 
 def pick_simple_option
