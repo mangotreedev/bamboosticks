@@ -1,5 +1,3 @@
-require 'pry'
-
 def setup_frontend_framework_layout(devise_option)
   if devise_option
     inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
@@ -439,14 +437,10 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   RUBY
 end
 
-inject_into_file 'Gemfile', before: "group :development do" do
+inject_into_file 'Gemfile', after: "gem 'selenium-webdriver'" do
   <<-RUBY
-group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'capybara-screenshot'
-end
 
+  gem 'capybara-screenshot'
   RUBY
 end
 
