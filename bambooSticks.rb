@@ -228,7 +228,7 @@ def setup_devise_authentication
   ########################################
   rails_command 'db:migrate'
   run "spring stop" # Fix hangtime
-  run 'rails generate devise:views'
+  run 'rails generate devise:views' unless options['api']
 
   # App controller
   inject_into_file 'app/controllers/application_controller.rb', after: 'ActionController::Base' do
@@ -239,16 +239,18 @@ def setup_devise_authentication
 
   # Pages Controller
   ########################################
-  run 'rm app/controllers/pages_controller.rb'
-  file 'app/controllers/pages_controller.rb', <<~RUBY
-    class PagesController < ApplicationController
-      skip_before_action :authenticate_user!, only: [ :home, :kitchensink ]
+  unless options['api']
+    run 'rm app/controllers/pages_controller.rb'
+    file 'app/controllers/pages_controller.rb', <<~RUBY
+      class PagesController < ApplicationController
+        skip_before_action :authenticate_user!, only: [ :home, :kitchensink ]
 
-      def home; end
+        def home; end
 
-      def kitchensink; end
-    end
-  RUBY
+        def kitchensink; end
+      end
+    RUBY
+  end
 end
 
 def setup_pundit_authorization
@@ -349,23 +351,35 @@ say
 say
 say '-- Welcome to 🎍 BambooSticks 🎍: A RoR Template! --'
 say 'a setup developed by MangoTree 🥭🌴 to support you in your development'
-say
+
+if options['api']
+  say '🤖 You added the API option 🤖'
+end
+
 say 'Tell us a bit about how you want to set up your app:'
-say 'Which UI framework would you like to use? 🏗'
-say '1 - Bootstrap'
-say '2 - Tailwind'
-say '3 - No framework, thanks!'
-selected_framework = pick_framework
+say
 
-bootstrap_option = selected_framework == 'bootstrap'
-tailwind_option = selected_framework == 'tailwind'
-no_framework_option = selected_framework == 'no-framework'
+bootstrap_option = false
+tailwind_option = false
+no_framework_option = false
 
-if bootstrap_option
-  say "Which version of Bootstrap do you want to use?"
-  say '1 - Bootstrap v5.0'
-  say '2 - Bootstrap v4.6'
-  bootstrap_last_version = pick_bootstrap_version
+unless options['api']
+  say 'Which UI framework would you like to use? 🏗'
+  say '1 - Bootstrap'
+  say '2 - Tailwind'
+  say '3 - No framework, thanks!'
+  selected_framework = pick_framework
+
+  bootstrap_option = selected_framework == 'bootstrap'
+  tailwind_option = selected_framework == 'tailwind'
+  no_framework_option = selected_framework == 'no-framework'
+
+  if bootstrap_option
+    say "Which version of Bootstrap do you want to use?"
+    say '1 - Bootstrap v5.0'
+    say '2 - Bootstrap v4.6'
+    bootstrap_last_version = pick_bootstrap_version
+  end
 end
 
 say 'Would you like to implement devise for authentication? [yn] 🤠'
@@ -374,9 +388,12 @@ if devise_option
   say 'Would you like to implement pundit for authorization? [yn] 🧐'
   pundit_option = pick_simple_option
 end
-say 'Would you like to implement stimulus for javascript? [yn] 🥳'
-stimulus_option = pick_simple_option
-say
+
+unless options['api']
+  say 'Would you like to implement stimulus for javascript? [yn] 🥳'
+  stimulus_option = pick_simple_option
+  say
+end
 
 run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 
@@ -388,7 +405,7 @@ inject_into_file 'Gemfile', before: 'group :development, :test do' do
     gem 'font-awesome-sass'
     gem 'simple_form'
   RUBY
-end
+end unless options['api']
 
 inject_into_file 'Gemfile', before: 'group :development, :test do' do
   <<~RUBY
@@ -399,6 +416,7 @@ end if devise_option
 inject_into_file 'Gemfile', before: 'group :development, :test do' do
   <<~RUBY
     gem 'pundit'
+
   RUBY
 end if pundit_option
 
@@ -408,6 +426,7 @@ inject_into_file 'Gemfile', after: 'group :development, :test do' do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
+
   # Testing Suite
   gem 'rspec-rails'
   gem 'database_cleaner-active_record'
@@ -438,28 +457,32 @@ gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
 # Assets & GitHub Actions/Workflow
 ########################################
-run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
 run 'curl -L https://github.com/mangotreedev/bamboosticks/archive/master.zip > stylesheets.zip'
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip'
 
-run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/stylesheets' if bootstrap_option
-run 'mv app/assets/bamboosticks-master/vanilla-scss/stylesheets app/assets/stylesheets' if no_framework_option
+unless options['api']
+  run 'rm -rf app/assets/stylesheets'
 
-if tailwind_option
-  run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
-  run 'mv app/assets/bamboosticks-master/tailwind/config/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
-end
+  run 'mv app/assets/bamboosticks-master/bootstrap/stylesheets app/assets/stylesheets' if bootstrap_option
+  run 'mv app/assets/bamboosticks-master/vanilla-scss/stylesheets app/assets/stylesheets' if no_framework_option
 
-if tailwind_option || no_framework_option
-  run 'mkdir app/javascript/components'
-  run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
+  if tailwind_option
+    run 'mv app/assets/bamboosticks-master/tailwind/stylesheets app/assets/stylesheets'
+    run 'mv app/assets/bamboosticks-master/tailwind/config/simple_form_tailwind.rb config/initializers/simple_form_tailwind.rb'
+  end
+
+  if tailwind_option || no_framework_option
+    run 'mkdir app/javascript/components'
+    run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
+  end
 end
 
 run 'mv app/assets/bamboosticks-master/.github .github'
 run 'rm -rf app/assets/bamboosticks-master'
+run 'rm -rf app/assets' if options['api']
 
-if !devise_option
+if !devise_option && !options['api']
   run 'rm -rf app/assets/stylesheets/components/_navbar.scss'
   gsub_file('app/assets/stylesheets/components/_index.scss', '@import "navbar";', '')
 end
@@ -469,22 +492,23 @@ end
 gsub_file('config/environments/development.rb', /config\.assets\.debug.*/, 'config.assets.debug = false')
 
 
-
 # Layout
 ########################################
-if Rails.version < "6"
-  scripts = <<~HTML
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+unless options['api']
+  if Rails.version < "6"
+    scripts = <<~HTML
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+          <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    HTML
+    gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>", scripts)
+  end
+  gsub_file('app/views/layouts/application.html.erb', "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>", "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>")
+  style = <<~HTML
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   HTML
-  gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>", scripts)
+  gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>", style)
 end
-gsub_file('app/views/layouts/application.html.erb', "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>", "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>")
-style = <<~HTML
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-HTML
-gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>", style)
 
 # README
 ########################################
@@ -517,13 +541,14 @@ after_bundle do
 
   generate('simple_form:install', '--bootstrap') if bootstrap_option
 
-  generate(:controller, 'pages', 'home kitchensink', '--skip-routes', '--no-test-framework')
+  unless options['api']
+    generate(:controller, 'pages', 'home kitchensink', '--skip-routes', '--no-test-framework')
 
-  # TODO
-  # Routes
-  ########################################
-  route "root to: 'pages#home'"
-  route "get '/kitchensink', to: 'pages#kitchensink' if Rails.env.development?"
+    # Routes
+    ########################################
+    route "root to: 'pages#home'"
+    route "get '/kitchensink', to: 'pages#kitchensink' if Rails.env.development?"
+  end
 
   # Git ignore
   ########################################
@@ -539,7 +564,7 @@ after_bundle do
 
   # Options Setup
   ########################################
-  setup_frontend_framework_layout(devise_option)
+  setup_frontend_framework_layout(devise_option) unless options['api']
   setup_bootstrap_framework(devise_option, bootstrap_last_version) if bootstrap_option
   setup_tailwind_framework(devise_option) if tailwind_option
   setup_vanilla_frontend(devise_option) if no_framework_option
