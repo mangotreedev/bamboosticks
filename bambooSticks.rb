@@ -473,7 +473,7 @@ unless options['api']
   end
 
   if tailwind_option || no_framework_option
-    run 'mkdir app/javascript/components'
+    run 'mkdir -p app/javascript/components'
     run 'mv app/assets/bamboosticks-master/tailwind/javascript/initAlerts.js app/javascript/components/initAlerts.js'
   end
 end
